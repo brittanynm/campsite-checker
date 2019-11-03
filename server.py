@@ -1,4 +1,4 @@
-"""Final project -- capsite checker"""
+"""Final project: campsite checker"""
 
 from jinja2 import StrictUndefined
 
