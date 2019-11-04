@@ -17,6 +17,18 @@ app = Flask(__name__)
 app.jinja_env.undefined = StrictUndefined
 
 
+# FUNCTIONS - do these live in model.py?
+# format_date
+# generate start date and end date
+# send request
+# get park information
+# get name of campsite
+# get num of available sites
+# validate dates entered are in the future
+# validate phone number entered
+# check avialability (main)
+
+
 @app.route('/')
 def index():
     """Homepage."""
@@ -26,7 +38,7 @@ def index():
 
 @app.route('/', methods=['GET'])
 def campsite_search():
-    """Show form for campsite search"""
+    """Show homepage and form for campsite search"""
 
     return render_template("campsite_search.html")
 
@@ -37,6 +49,11 @@ def process_search():
 
     # Get form variables
     selected_campsite = request.form["selected_campsite"]
+
+    payload - {}
+    headers = {}
+    response = requests.get()
+    data = response.json()
 
     # How can I package all of this info at the end when phone is submitted?
     campsite = Request(selected_campsite=name)
@@ -57,7 +74,7 @@ def date_selector():
 
 
 @app.route('/dates', methods=['POST'])
-def process_dates():
+def process_dates(start, end):
     """Process dates selected"""
 
     # Get form variables
