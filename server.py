@@ -6,6 +6,7 @@ from flask import Flask, render_template, request, flash, redirect, session
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, User, Campsite, Request
+import api
 
 
 app = Flask(__name__)
@@ -15,18 +16,6 @@ app = Flask(__name__)
 
 # Raises an error if you use an undefined variable in Jinja2
 app.jinja_env.undefined = StrictUndefined
-
-
-# FUNCTIONS - do these live in model.py?
-# format_date
-# generate start date and end date
-# send request
-# get park information
-# get name of campsite
-# get num of available sites
-# validate dates entered are in the future
-# validate phone number entered
-# check avialability (main)
 
 
 @app.route('/')
