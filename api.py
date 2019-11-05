@@ -1,5 +1,7 @@
 import requests
 
+#search URL
+base_search_url = "https://ridb.recreation.gov/api/vi/campsites"
 
 # API information
 BASE_URL = "http://www.recreation.gov"
@@ -21,15 +23,16 @@ INPUT_DATE_FORMAT = "%Y-%m-%d"
 
 
 def get_campsite_id(campsite_name):
-    campsite_name = resp['campground']['facility_name']
-    # if the required information is in the request, look for campsite
-
     # FIX ME: look up campsite id with name
 
+    campsite_name = resp['campground']['facility_name']
+    campsite_id = resp['campground']['facility_id']
+
+    # if the required information is in the request, look for campsite
     if selected_campsite:
-        payload - {}
+        payload = {}
         headers = {}
-        response = requests.get()
+        response = requests.get(BASE_URL + AVAILABILITY_ENDPOINT + )
         data = response.json()
 
         # How can I package all of this info at the end when phone is submitted?
@@ -63,10 +66,10 @@ def generate_params(start, end):
 
 
 def send_request(url, params):
-    # payload = {}
-    # request = requests.get(url, params=payload)
+    payload = {}
+    request = requests.get(url, params=payload)
 
-    # return response.json
+    return response.json
 
 
 def get_campsite_information(campsite_id, params):

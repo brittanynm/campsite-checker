@@ -18,82 +18,82 @@ app = Flask(__name__)
 app.jinja_env.undefined = StrictUndefined
 
 
-# @app.route('/')
-# def index():
-#     """Homepage."""
+@app.route('/')
+def index():
+    """Homepage."""
 
-#     return render_template("homepage.html")
-
-
-# @app.route('/', methods=['GET'])
-# def campsite_search():
-#     """Show homepage and form for campsite search"""
-
-#     return render_template("campsite_search.html")
+    return render_template("homepage.html")
 
 
-# @app.route('/', methods=['POST'])
-# def process_search():
-#     """Process campsite search and selection"""
+@app.route('/', methods=['GET'])
+def campsite_search():
+    """Show homepage and form for campsite search"""
 
-#     # Get form variables
-#     campsite_name = request.form["selected_campsite"]
-
-#     get_campsite_id(campsite_name)
-
-#     return redirect(f"/dates")
+    return render_template("campsite_search.html")
 
 
-# @app.route('/dates', methods=['GET'])
-# # should I store campsite in URL?
-# def date_selector():
-#     """Show calendar to select check in, check out dates"""
+@app.route('/', methods=['POST'])
+def process_search():
+    """Process campsite search and selection"""
 
-#     return render_template("calendar.html")
+    # Get form variables
+    campsite_name = request.form["selected_campsite"]
 
+    get_campsite_id(campsite_name)
 
-# @app.route('/dates', methods=['POST'])
-# def process_dates(start, end):
-#     """Process dates selected"""
-
-#     # Get form variables
-#    	date_start = request.form["date_start"]
-#     date_end = request.form["date_end"]
-
-#     # date_obj = 
-
-#     # current_date = get today's datetime
-#     valid_date(date_obj)
-
-#     return redirect(f"/submit")
+    return redirect(f"/dates")
 
 
-# @app.route('/submit', methods=['GET'])
-# # should I store previous selections in URL?
-# def submission_form():
-#     """Collect phone number and display previous selections"""
+@app.route('/dates', methods=['GET'])
+# should I store campsite in URL?
+def date_selector():
+    """Show calendar to select check in, check out dates"""
 
-#     #additionally display current availability
-
-#     return render_template("submission_form.html")
+    return render_template("calendar.html")
 
 
-# @app.route('/submit', methods=['POST'])
-# def process_request():
-#     """Process request for campsite notification"""
+@app.route('/dates', methods=['POST'])
+def process_dates(start, end):
+    """Process dates selected"""
 
-#     # Get form variables
-#    	phone = request.form["phone"]
+    # Get form variables
+   	date_start = request.form["date_start"]
+    date_end = request.form["date_end"]
 
-#     #created_at = get today's datetime
+    # date_obj = 
 
-#     return redirect(f"/confirmation")
+    # current_date = get today's datetime
+    valid_date(date_obj)
+
+    return redirect(f"/submit")
 
 
-# @app.route('/confirmation', methods=['GET'])
-# # should I store previous selections in URL?
-# def confirmation():
-#     """Confirm submitted information"""
+@app.route('/submit', methods=['GET'])
+# should I store previous selections in URL?
+def submission_form():
+    """Collect phone number and display previous selections"""
 
-#     return render_template("confirmation_page.html")
+    #additionally display current availability
+
+    return render_template("submission_form.html")
+
+
+@app.route('/submit', methods=['POST'])
+def process_request():
+    """Process request for campsite notification"""
+
+    # Get form variables
+   	phone = request.form["phone"]
+
+    #created_at = get today's datetime
+
+    return redirect(f"/confirmation")
+
+
+@app.route('/confirmation', methods=['GET'])
+# should I store previous selections in URL?
+def confirmation():
+    """Confirm submitted information"""
+
+    return render_template("confirmation_page.html")
 
