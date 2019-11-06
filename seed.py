@@ -41,7 +41,29 @@ campsite_name = (response['results'][0]['entity_id'])
 # print(response.keys())
 print("\n\n\n")
 
-# print(response["results"])
+for item in response["results"]:
+    campsite_id = item["entity_id"]
+    campsite_name = item["name"]
+    directions = item["directions"]
+    if item.get("preview_image_url", None) == None:
+        continue
+    else:
+        preview_img = item["preview_image_url"]
+    
+    if item.get("city", None) == None:
+        continue
+    else:
+        city = item["city"]
+    
+    if item.get("parent_name", None) == None:
+        continue
+    else:
+        park = item["parent_name"]
+    f.writerow([campsite_id, campsite_name, park, preview_image_url, directions, city])
+
+#use directions, reservable, city, description, preview_image_url
+#look into 'rate' further and pprint
+
 
 # for item in response:
     #look into response.json.keys()
