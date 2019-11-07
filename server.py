@@ -17,13 +17,6 @@ app.secret_key = 'ABC'
 app.jinja_env.undefined = StrictUndefined
 
 
-@app.route('/')
-def index():
-    """Homepage."""
-
-    return render_template("homepage.html")
-
-
 @app.route('/', methods=['GET'])
 def campsite_search():
     """Show homepage and form for campsite search"""
