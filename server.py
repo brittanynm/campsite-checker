@@ -18,23 +18,25 @@ app.jinja_env.undefined = StrictUndefined
 
 
 @app.route('/', methods=['GET'])
-def campsite_search():
+def index():
     """Show homepage and form for campsite search"""
     campsites = Campsite.query.all()
 
     return render_template("homepage.html", campsites=campsites)
 
 
-@app.route('/', methods=['POST'])
+@app.route('/search')
 def process_search():
     """Process campsite search and selection"""
-
+    
     # Get form variables
-    campsite_name = request.form["selected_campsite"]
+    campsite_name = request.form["query"]
+    # get_campsite_id(campsite_name)
+    # campsite_name = request.args.get("query").all()
+    campsites = Campsite.query.filter_by(campsite_name)
 
-    get_campsite_id(campsite_name)
-
-    return redirect("/dates")
+    return render_template("homepage.html", campsites=campsites)
+    # return redirect("/dates")
 
 
 @app.route('/dates', methods=['GET'])
