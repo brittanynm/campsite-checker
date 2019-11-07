@@ -27,13 +27,17 @@ def index():
 
 @app.route('/search')
 def process_search():
-    """Process campsite search and selection"""
-    
+    """Process campsite search"""
+
     # Get form variables
-    campsite_name = request.form["query"]
+    print(request.args)
+    print(request.args.get("query"))
     # get_campsite_id(campsite_name)
-    # campsite_name = request.args.get("query").all()
-    campsites = Campsite.query.filter_by(campsite_name)
+    campsite_name = request.args.get("query")
+    print(campsite_name)
+
+
+    campsites = Campsite.query.filter_by(name=campsite_name).all()
 
     return render_template("homepage.html", campsites=campsites)
     # return redirect("/dates")
