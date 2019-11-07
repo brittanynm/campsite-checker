@@ -29,15 +29,11 @@ def index():
 def process_search():
     """Process campsite search"""
 
-    # Get form variables
-    print(request.args)
-    print(request.args.get("query"))
-    # get_campsite_id(campsite_name)
+    # Get form variable
     campsite_name = request.args.get("query")
-    print(campsite_name)
-
-
-    campsites = Campsite.query.filter_by(name=campsite_name).all()
+    # Search database by name and park
+    q = Campsite.query
+    campsites = q.filter( (Campsite.name.ilike(f'%{campsite_name}%')) | (Campsite.park.ilike(f'%{campsite_name}%'))).all()
 
     return render_template("homepage.html", campsites=campsites)
     # return redirect("/dates")
