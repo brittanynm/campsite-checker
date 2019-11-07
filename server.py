@@ -12,7 +12,7 @@ from model import connect_to_db, db, User, Campsite, Request
 app = Flask(__name__)
 
 # Required to use Flask sessions and the debug toolbar. Where does this password come from??
-# app.secret_key =
+app.secret_key = 'ABC'
 
 # Raises an error if you use an undefined variable in Jinja2
 app.jinja_env.undefined = StrictUndefined
@@ -41,7 +41,7 @@ def process_search():
 
     get_campsite_id(campsite_name)
 
-    return redirect(f"/dates")
+    return redirect("/dates")
 
 
 @app.route('/dates', methods=['GET'])
@@ -57,7 +57,7 @@ def process_dates(start, end):
     """Process dates selected"""
 
     # Get form variables
-   	date_start = request.form["date_start"]
+    date_start = request.form["date_start"]
     date_end = request.form["date_end"]
 
     # date_obj = 
@@ -65,7 +65,7 @@ def process_dates(start, end):
     # current_date = get today's datetime
     valid_date(date_obj)
 
-    return redirect(f"/submit")
+    return redirect("/submit")
 
 
 @app.route('/submit', methods=['GET'])
@@ -83,11 +83,11 @@ def process_request():
     """Process request for campsite notification"""
 
     # Get form variables
-   	phone = request.form["phone"]
+    phone = request.form["phone"]
 
     #created_at = get today's datetime
 
-    return redirect(f"/confirmation")
+    return redirect("/confirmation")
 
 
 @app.route('/confirmation', methods=['GET'])
@@ -97,3 +97,14 @@ def confirmation():
 
     return render_template("confirmation_page.html")
 
+if __name__ == "__main__":
+
+    # Change to False for demo
+    app.debug = True
+
+    connect_to_db(app)
+
+    # Use the DebugToolbar
+    DebugToolbarExtension(app)
+
+    app.run(host="0.0.0.0")
