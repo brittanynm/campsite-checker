@@ -15,16 +15,18 @@
                             <label for="query">Campground to reserve: </label>
                             <input type="text" name="query" class="form-control" id="query">
                         </div>
-                        <button type="submit" class="btn btn-primary">Search</button>
+                        <button type="submit" class="btn btn-primary">Search</button><br><br>
                     </form>
             </div>
 
         <div class="col-sm-8 search-main">
             {% for campsite in campsites %}
             <div class="campsite-name">
-                <h3 class="campsite-name-title">{{ campsite.name }}</h3>
 
-                <p>{{ campsite.park }}</p>
+                <input type="radio" name="selected_site" >
+                <b>{{ campsite.name }}</b>
+
+                {{ campsite.park }}<hr>
             </div>
             {% endfor %}
 

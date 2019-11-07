@@ -34,6 +34,7 @@ def process_search():
     # Search database by name and park
     q = Campsite.query
     campsites = q.filter( (Campsite.name.ilike(f'%{campsite_name}%')) | (Campsite.park.ilike(f'%{campsite_name}%'))).all()
+    campsites = campsites
 
     return render_template("homepage.html", campsites=campsites)
     # return redirect("/dates")
