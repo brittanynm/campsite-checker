@@ -20,8 +20,9 @@ app.jinja_env.undefined = StrictUndefined
 @app.route('/', methods=['GET'])
 def campsite_search():
     """Show homepage and form for campsite search"""
+    campsites = Campsite.query.all()
 
-    return render_template("campsite_search.html")
+    return render_template("homepage.html", campsites=campsites)
 
 
 @app.route('/', methods=['POST'])

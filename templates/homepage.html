@@ -4,4 +4,32 @@
     <h1 id="homepage-title">Campsite Checker</h1>
     </div>
 
+    <div class="row">
+
+        <div class="col-sm-8 search-main">
+            {% for campsite in campsites %}
+            <div class="campsite-name">
+                <h3 class="campsite-name-title">{{ campsite.name }}</h3>
+
+                <p>{{ campsite.park }}</p>
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <div class="col-sm-3 col-sm-offset-1 name-sidebar">
+            <div class="sidebar-module sidebar-module-inset">
+                <h3>Search</h3>
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label for="query">Name</label>
+                            <input type="text" class="form-control" name="query" id="query">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </form>
+            </div>
+        </div>
+    </div>
+    
+
 {% endblock %}
