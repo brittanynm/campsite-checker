@@ -11,7 +11,6 @@ from model import connect_to_db, db, User, Campsite, Request
 
 app = Flask(__name__)
 
-# Required to use Flask sessions and the debug toolbar. Where does this password come from??
 app.secret_key = 'ABC'
 
 # Raises an error if you use an undefined variable in Jinja2

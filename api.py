@@ -1,9 +1,11 @@
 import requests
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import func
 
 #search URL
-base_search_url = "https://ridb.recreation.gov/api/vi/campsites"
+# base_search_url = "https://ridb.recreation.gov/api/vi/campsites"
 
-# API information
+# API availability information
 BASE_URL = "http://www.recreation.gov"
 AVAILABILITY_ENDPOINT = "/api/camps/availability/campground/"
 MAIN_PAGE_ENDPOINT = "/api/camps/campgrounds/"
@@ -11,7 +13,6 @@ MAIN_PAGE_ENDPOINT = "/api/camps/campgrounds/"
 INPUT_DATE_FORMAT = "%Y-%m-%d"
 
 # FUNCTION IDEAS 
-# format_date
 # generate start date and end date
 # send request
 # get park information
@@ -24,18 +25,7 @@ INPUT_DATE_FORMAT = "%Y-%m-%d"
 
 def get_campsite_id(campsite_name):
     # FIX ME: look up campsite id with name
-
-    campsite_name = resp['campground']['facility_name']
-    campsite_id = resp['campground']['facility_id']
-
-    # if the required information is in the request, look for campsite
-    if selected_campsite:
-        payload = {}
-        headers = {}
-        response = requests.get(BASE_URL + AVAILABILITY_ENDPOINT + )
-        data = response.json()
-
-        # How can I package all of this info at the end when phone is submitted?
+    SELECT campsite_id FROM campsites WHERE campsite_name=name
 
         # store selected site in database
         campsite = Request(selected_campsite=name)
@@ -47,45 +37,26 @@ def get_campsite_id(campsite_name):
     return campsite_id
 
 
-def format_date(date_obj):
-    # FIX ME
-
-    #return formatted_date
-
-
-def valid_dates():
-    # FIX ME
-    #if current_date > date_start OR if invalid format:
-        # flash("Select a valid date ")
-
-
 def generate_params(start, end):
-    # FIX ME
+    # From HTML calendar, pass selected dates into database and into availability checker
 
-    #return params
+    #return formatted params
 
 
-def send_request(url, params):
+def send_avail_request(url, params):
     payload = {}
     request = requests.get(url, params=payload)
 
     return response.json
 
 
-def get_campsite_information(campsite_id, params):
-    url = "{}{}{}".format(BASE_URL, AVAILABILITY_ENDPOINT, site_id)
-
-    return send_request(url, params)
-
-
 def num_of_available_sites(resp, start_date, end_date):
-    # FIX ME
+    # pass start and end dates and the response from the api
 
     #return num_available, total_sites
 
 
-def main(campsite_id // campsite_name):
-    # FIX ME -- which arg to pass?
+def main(campsite_id):
 
     #return what is available or sold out
 
