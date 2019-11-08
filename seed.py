@@ -12,6 +12,9 @@ def load_campsites():
     for row in open("seed.csv", encoding='cp1252'):
         row = row.rstrip()
         site_id, name, park = row.split(",")
+        site_id = site_id.title()
+        name = name.title()
+        park = park.title()
 
         campsite = Campsite(id=site_id,
                     name=name,

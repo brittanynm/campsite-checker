@@ -6,8 +6,11 @@ from flask import Flask, render_template, request, flash, redirect, session
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, User, Campsite, Request
-# import api
 
+from flask_wtf import Form
+from wtforms import DateField
+from datetime import date
+# import api
 
 app = Flask(__name__)
 
@@ -26,7 +29,7 @@ def index():
 
 
 @app.route('/search')
-def process_search():
+def search():
     """Process campsite search"""
 
     # Get form variable
@@ -37,15 +40,37 @@ def process_search():
     campsites = campsites
 
     return render_template("homepage.html", campsites=campsites)
-    # return redirect("/dates")
+    
+
+@app.route('/search', methods=['POST'])
+def process_search():
+    # WIP
+    selected_campsite = request.form["selected_site"]
+    print(selected_campsite)
+    #add selection to URL
+    return redirect("/dates")
 
 
-@app.route('/dates', methods=['GET'])
-# should I store campsite in URL?
-def date_selector():
-    """Show calendar to select check in, check out dates"""
+# @app.route('/dates', methods=['GET'])
+# # should I store campsite in URL?
+# def date_selector():
+#     """Show calendar to select check in, check out dates"""
 
-    return render_template("calendar.html")
+#     return render_template("calendar.html")
+
+class DateForm(Form):
+    dt = DateField('Pick a Date', format="%m/%d/%Y")
+
+
+@app.route('/dates', methods=['POST','GET'])
+def home():
+    form = DateForm()
+    if form.validate_on_submit():
+        return form.dt.data.strftime('%x')
+    return render_template('calendar.html', form=form)
+
+
+
 
 
 @app.route('/dates', methods=['POST'])
@@ -80,18 +105,12 @@ def process_request():
 
     # Get form variables
     phone = request.form["phone"]
+    #validate phone with regex in jinja and here
 
     #created_at = get today's datetime
 
-    return redirect("/confirmation")
-
-
-@app.route('/confirmation', methods=['GET'])
-# should I store previous selections in URL?
-def confirmation():
-    """Confirm submitted information"""
-
     return render_template("confirmation_page.html")
+
 
 if __name__ == "__main__":
 

@@ -18,8 +18,8 @@
                         <button type="submit" class="btn btn-primary">Search</button><br><br>
                     </form>
             </div>
-
-        <div class="col-sm-8 search-main">
+        <form class="form-inline" method = "POST" action="search">
+            <div class="col-sm-8 search-main">
             {% for campsite in campsites %}
             <div class="campsite-name">
 
@@ -29,8 +29,9 @@
                 {{ campsite.park }}<hr>
             </div>
             {% endfor %}
-
-        </div>
+        </div><br>
+        <button type="submit" class = "btn btn-selection">Next > </button><br><br>
+        </form>
 
         </div>
     </div>
