@@ -44,47 +44,28 @@ def search():
 
 @app.route('/search', methods=['POST'])
 def process_search():
-    # WIP
+    
     selected_campsite = request.form["selected_site"]
-    print(selected_campsite)
     #add selection to URL
     return redirect("/dates")
 
 
-# @app.route('/dates', methods=['GET'])
-# # should I store campsite in URL?
-# def date_selector():
-#     """Show calendar to select check in, check out dates"""
+@app.route('/dates', methods=['GET'])
+# should I store campsite in URL?
+def date_selector():
+    """Show calendar to select check in, check out dates"""
 
-#     return render_template("calendar.html")
-
-class DateForm(Form):
-    dt = DateField('Pick a Date', format="%m/%d/%Y")
-
-
-@app.route('/dates', methods=['POST','GET'])
-def home():
-    form = DateForm()
-    if form.validate_on_submit():
-        return form.dt.data.strftime('%x')
-    return render_template('calendar.html', form=form)
-
-
-
+    return render_template("calendar.html")
 
 
 @app.route('/dates', methods=['POST'])
-def process_dates(start, end):
+def process_dates():
     """Process dates selected"""
 
     # Get form variables
-    date_start = request.form["date_start"]
-    date_end = request.form["date_end"]
-
-    # date_obj = 
-
-    # current_date = get today's datetime
-    valid_date(date_obj)
+    date_start = request.form["date-start"]
+    date_end = request.form["date-end"]
+    print(date_start, date_end)
 
     return redirect("/submit")
 
