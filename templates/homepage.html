@@ -9,7 +9,7 @@
 
         <div class="col-sm-3 col-sm-offset-1 name-sidebar">
             <div class="sidebar-module sidebar-module-inset">
-                <h3>Search</h3>
+                <br><br>
                     <form class="form-inline" method = "GET" action="search">
                         <div class="form-group">
                             <label for="query">Campground to reserve: </label>
@@ -23,7 +23,7 @@
             {% for campsite in campsites %}
             <div class="campsite-name">
 
-                <input type="radio" name="selected_site" >
+                <input type="radio" name="selected_site" value={{ campsite }}>
                 <b>{{ campsite.name }}</b>
 
                 {{ campsite.park }}<hr>

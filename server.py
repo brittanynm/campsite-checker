@@ -10,6 +10,7 @@ from model import connect_to_db, db, User, Campsite, Request
 from flask_wtf import Form
 from wtforms import DateField
 from datetime import date
+import lookup
 # import api
 
 app = Flask(__name__)
@@ -31,7 +32,6 @@ def index():
 @app.route('/search')
 def search():
     """Process campsite search"""
-
     # Get form variable
     campsite_name = request.args.get("query")
     # Search database by name and park
@@ -46,11 +46,13 @@ def search():
 def process_search():
     
     selected_site = request.form["selected_site"]
+    # print("*******", selected_site.id)
     #add selection to URL
     return redirect("/dates")
 
 
 @app.route('/dates', methods=['GET'])
+#check out jhacks lab and pull variable out of url
 # should I store campsite in URL?
 def date_selector():
     """Show calendar to select check in, check out dates"""
@@ -83,12 +85,18 @@ def submission_form():
 @app.route('/submit', methods=['POST'])
 def process_request():
     """Process request for campsite notification"""
-
     # Get form variables
     phone = request.form["phone"]
-    #validate phone with regex in jinja and here
-    flash("Submitted")
-    return redirect("/")
+    if is_valid_number(phone) == True:
+        flash("Submitted")
+        return redirect("/")
+    else:
+        #block form from submitting
+        # flash("Please enter a valid phone number")
+
+    # or validate phone with regex in jinja and here
+    
+    
 
 
 if __name__ == "__main__":
