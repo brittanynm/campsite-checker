@@ -87,10 +87,8 @@ def process_request():
     # Get form variables
     phone = request.form["phone"]
     #validate phone with regex in jinja and here
-
-    #created_at = get today's datetime
-
-    return render_template("confirmation_page.html")
+    flash("Submitted")
+    return redirect("/")
 
 
 if __name__ == "__main__":
