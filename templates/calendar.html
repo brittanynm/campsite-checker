@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-
+<body>
 <form action="dates" method="POST">
     <label for="start">Arrival Date:</label>
         <input type="date" id="theDate" name="date-start"
@@ -8,7 +8,7 @@
         <input type="date" id="start" name="date-end"><br><br>
     <button type="submit" class="date-selection">Submit</button>
 </form>
-  
+</body> 
   <script src="datepicker.js"></script>
 
 {% endblock %}

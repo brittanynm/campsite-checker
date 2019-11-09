@@ -45,7 +45,7 @@ def search():
 @app.route('/search', methods=['POST'])
 def process_search():
     
-    selected_campsite = request.form["selected_site"]
+    selected_site = request.form["selected_site"]
     #add selection to URL
     return redirect("/dates")
 
