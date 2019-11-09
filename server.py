@@ -10,7 +10,7 @@ from model import connect_to_db, db, User, Campsite, Request
 from flask_wtf import Form
 from wtforms import DateField
 from datetime import date
-import lookup
+from lookup import is_valid_number
 # import api
 
 app = Flask(__name__)
@@ -91,7 +91,8 @@ def process_request():
         flash("Submitted")
         return redirect("/")
     else:
-        #block form from submitting
+        print("Invalid number")
+        # block form from submitting in js
         # flash("Please enter a valid phone number")
 
     # or validate phone with regex in jinja and here
