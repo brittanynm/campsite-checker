@@ -87,14 +87,16 @@ def process_request():
     """Process request for campsite notification"""
     # Get form variables
     phone = request.form["phone"]
+
     if is_valid_number(phone) == True:
         flash("Submitted")
         return redirect("/")
     else:
         print("Invalid number")
         # block form from submitting in js
-        # flash("Please enter a valid phone number")
-
+        flash("Please enter a valid phone number")
+        return redirect("/")
+        #for now, redirect home
     # or validate phone with regex in jinja and here
     
     
