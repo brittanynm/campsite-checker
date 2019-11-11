@@ -1,40 +1,45 @@
 {% extends 'base.html' %}
 {% block content %}
     <div id="homepage-block">
-    <h1 id="homepage-title">Campsite Checker</h1>
+        <br><br>
+        <h1 id="homepage-title">Hey bb!</h1>
     </div>
 
     <div class="row">
 
-
         <div class="col-sm-3 col-sm-offset-1 name-sidebar">
             <div class="sidebar-module sidebar-module-inset">
                 <br><br>
-                    <form class="form-inline" method = "GET" action="search">
+                    <form class="form-inline" method = "GET" action="/search">
                         <div class="form-group">
-                            <label for="query">Campground to reserve: </label>
+                            <label for="query">Where do you want to go? </label>
                             <input type="text" name="query" class="form-control" id="query">
                         </div>
                         <button type="submit" class="btn btn-primary">Search</button><br><br>
                     </form><br><br>
             </div>
-        <form class="form-inline" method = "POST" action="search">
-            <div class="col-sm-8 search-main">
-            {% for campsite in campsites %}
-            <div class="campsite-name">
-
-                <input type="radio" name="selected_site" value={{ campsite }}>
-                <b>{{ campsite.name }}</b>
-
-                {{ campsite.park }}<hr>
-            </div>
-            {% endfor %}
-        </div><br>
-        <button type="submit" class = "btn btn-selection">Next > </button><br><br>
-        </form>
-
         </div>
     </div>
+
+    <div>
+        <form class="form-inline" method = "POST" action="/search">
+            <div class="list">
+                {% for campsite in campsites %}
+                <div class="campsite-name">
+
+                    <input type="radio" name="selected_site" value={{ campsite.name }} id={{ campsite.id }} required>
+                    <b>{{ campsite.name }}</b>
+
+                    {{ campsite.park }}<hr>
+                
+                {% endfor %}
+                <button type="submit" class = "btn btn-selection">Next > </button><br><br>
+               </div>
+        </form>
+
+    </div>
+  
+   
     
 
 {% endblock %}

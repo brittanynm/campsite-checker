@@ -29,47 +29,37 @@ def index():
     return render_template("homepage.html", campsites=campsites)
 
 
-@app.route('/search')
+@app.route('/search', methods=['GET', 'POST'])
 def search():
     """Process campsite search"""
-    # Get form variable
-    campsite_name = request.args.get("query")
-    # Search database by name and park
-    q = Campsite.query
-    campsites = q.filter( (Campsite.name.ilike(f'%{campsite_name}%')) | (Campsite.park.ilike(f'%{campsite_name}%'))).all()
-    campsites = campsites
-
-    return render_template("homepage.html", campsites=campsites)
-    
-
-@app.route('/search', methods=['POST'])
-def process_search():
-    
-    selected_site = request.form["selected_site"]
-    # print("*******", selected_site.id)
+    if request.method == 'GET':
+        # Get form variable
+        campsite_name = request.args.get("query")
+        # Search database by name and park
+        q = Campsite.query
+        campsites = q.filter( (Campsite.name.ilike(f'%{campsite_name}%')) | (Campsite.park.ilike(f'%{campsite_name}%'))).all()
+        campsites = campsites
+        return render_template("homepage.html", campsites=campsites)
+    else:
+        selected_site = request.form["selected_site"]
+        print("*******", selected_site)
     #add selection to URL
     return redirect("/dates")
 
 
-@app.route('/dates', methods=['GET'])
-#check out jhacks lab and pull variable out of url
-# should I store campsite in URL?
-def date_selector():
-    """Show calendar to select check in, check out dates"""
-
-    return render_template("calendar.html")
-
-
-@app.route('/dates', methods=['POST'])
+@app.route('/dates', methods=['GET', 'POST'])
 def process_dates():
     """Process dates selected"""
-
+    if request.method == 'GET':
+        campsite_name = request.args.get("query")
+        return render_template("calendar.html")
+    else:
     # Get form variables
-    date_start = request.form["date-start"]
-    date_end = request.form["date-end"]
-    print(date_start, date_end)
+        date_start = request.form["date-start"]
+        date_end = request.form["date-end"]
+        print(date_start, date_end)
 
-    return redirect("/submit")
+        return redirect("/submit")
 
 
 @app.route('/submit', methods=['GET'])
@@ -99,8 +89,6 @@ def process_request():
         #for now, redirect home
     # or validate phone with regex in jinja and here
     
-    
-
 
 if __name__ == "__main__":
 
