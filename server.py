@@ -43,6 +43,12 @@ def search():
     else:
         selected_site = request.form["selected_site"]
         session["site_name"] = selected_site
+        #query db for campsite_id and set into session
+        site_obj = Campsite.query.filter_by(name = selected_site).one()
+        site_id = site_obj.id
+        session["site_id"] = site_id
+        
+
     return redirect("/dates")
 
 
@@ -84,6 +90,7 @@ def process_request():
 
     if is_valid_number(phone) == True:
         flash("Submitted")
+
         return redirect("/")
     else:
         print("Invalid number")
