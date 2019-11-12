@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 <br><br>
+<div>
+    REQUEST DETAILS<br><br>
+    {{ site_name }}<br>
+    {{ date_start }} through {{ date_end }}<br>
+</div><br>
+
 <form class="submit-request" method="POST" >
     Phone number to alert: 
     <input type="text" name="phone"><br><br>

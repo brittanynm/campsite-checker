@@ -42,8 +42,7 @@ def search():
         return render_template("homepage.html", campsites=campsites)
     else:
         selected_site = request.form["selected_site"]
-        print("*******", selected_site)
-    #add selection to URL
+        session["site_name"] = selected_site
     return redirect("/dates")
 
 
@@ -52,12 +51,14 @@ def process_dates():
     """Process dates selected"""
     if request.method == 'GET':
         campsite_name = request.args.get("query")
-        return render_template("calendar.html")
+        return render_template("calendar.html", site_name=session['site_name'])
     else:
     # Get form variables
         date_start = request.form["date-start"]
         date_end = request.form["date-end"]
-        print(date_start, date_end)
+        print(date_start, date_end, session['site_name'])
+        session["date_start"] = date_start
+        session["date_end"] = date_end
 
         return redirect("/submit")
 
@@ -69,7 +70,10 @@ def submission_form():
 
     #additionally display current availability
 
-    return render_template("submission_form.html")
+    return render_template("submission_form.html", 
+                            site_name=session['site_name'],
+                            date_start=session["date_start"], 
+                            date_end=session["date_end"])
 
 
 @app.route('/submit', methods=['POST'])

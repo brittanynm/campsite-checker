@@ -3,9 +3,10 @@
 <body>
     <br><br>
     <form action="/dates" method="POST">
-        <label for="start">Arrival Date:</label>
+        <div>When would you like to go to {{ session['site_name'] }}?</div><br>
+        <label for="start">Arrive:</label>
             <input type="date" id="theDate" name="date-start"
-        <label for="end" required>Departure date:</label>
+        <label for="end" required>Departe:</label>
             <input type="date" id="start" name="date-end" required><br><br>
         <button type="submit" class="date-selection">Next > </button>
     </form>

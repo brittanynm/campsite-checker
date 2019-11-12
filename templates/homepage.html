@@ -27,7 +27,7 @@
                 {% for campsite in campsites %}
                 <div class="campsite-name">
 
-                    <input type="radio" name="selected_site" value={{ campsite.name }} id={{ campsite.id }} required>
+                    <input type="radio" name="selected_site" value="{{ campsite.name }}" required>
                     <b>{{ campsite.name }}</b>
 
                     {{ campsite.park }}<hr>
