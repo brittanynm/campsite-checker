@@ -11,7 +11,7 @@ from flask_wtf import Form
 from wtforms import DateField
 from datetime import date
 from lookup import is_valid_number
-# import api
+import api
 
 app = Flask(__name__)
 
@@ -47,7 +47,6 @@ def search():
         site_name = site_obj.name
         session["site_name"] = site_name
         park_name = site_obj.park
-        print("******", park_name)
         session["park_name"] = park_name
     return redirect("/dates")
 
