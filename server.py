@@ -16,7 +16,6 @@ from lookup import is_valid_number
 app = Flask(__name__)
 
 app.secret_key = 'ABC'
-
 # Raises an error if you use an undefined variable in Jinja2
 app.jinja_env.undefined = StrictUndefined
 
@@ -42,13 +41,14 @@ def search():
         return render_template("homepage.html", campsites=campsites)
     else:
         selected_site = request.form["selected_site"]
-        session["site_name"] = selected_site
+        session["site_id"] = selected_site
         #query db for campsite_id and set into session
-        site_obj = Campsite.query.filter_by(name = selected_site).one()
-        site_id = site_obj.id
-        session["site_id"] = site_id
-        
-
+        site_obj = Campsite.query.filter_by(id = selected_site).one()
+        site_name = site_obj.name
+        session["site_name"] = site_name
+        park_name = site_obj.park
+        print("******", park_name)
+        session["park_name"] = park_name
     return redirect("/dates")
 
 
@@ -57,7 +57,9 @@ def process_dates():
     """Process dates selected"""
     if request.method == 'GET':
         campsite_name = request.args.get("query")
-        return render_template("calendar.html", site_name=session['site_name'])
+        return render_template("calendar.html", 
+                                site_name=session["site_name"], 
+                                park_name=session["park_name"])
     else:
     # Get form variables
         date_start = request.form["date-start"]
@@ -68,57 +70,45 @@ def process_dates():
         return redirect("/submit")
 
 
-@app.route('/submit', methods=['GET'])
+@app.route('/submit', methods=['GET', 'POST'])
 # should I store previous selections in URL?
 def submission_form():
     """Collect phone number and display previous selections"""
-
-    #additionally display current availability
-
-    return render_template("submission_form.html", 
+    if request.method == 'GET':
+        # additionally display current availability
+        return render_template("submission_form.html", 
                             site_name=session['site_name'],
                             date_start=session["date_start"], 
                             date_end=session["date_end"])
-
-
-@app.route('/submit', methods=['POST'])
-def process_request():
-    """Process request for campsite notification"""
-    # Get form variables
-    phone = request.form["phone"]
-    #instantiate a new User object that creates a Request and commits dates, campsite name, campsite ID
-    #use session user_id to add to the request row
-    if is_valid_number(phone) == True:
-        print("**", phone)
-        new_user = User(phone=phone)
-        print("***", new_user)
-        db.session.add(new_user)
-        db.session.commit()
-        test = new_user.user_id
-        
-        session["user_id"] = test
-        
-        new_request = Request(user_id=session["user_id"], campsite_id=session["site_id"], date_start=session["date_start"], date_end=session["date_end"])
-        db.session.add(new_request)
-        db.session.commit()
-
-        return redirect("/")
     else:
-        print("Invalid number")
-        # block form from submitting in js
-        flash("Please enter a valid phone number")
-        return redirect("/")
-    # or validate phone with regex in jinja and here
+        # Get form variables
+        phone = request.form["phone"]
+        #instantiate a new User object that creates a Request and commits dates, campsite name, campsite ID
+        #use session user_id to add to the request row
+        if is_valid_number(phone) == True:
+            new_user = User(phone=phone)
+            db.session.add(new_user)
+            db.session.commit()
+            user_id = new_user.user_id
+            
+            session["user_id"] = user_id
+
+            new_request = Request(user_id=session["user_id"], campsite_id=session["site_id"], date_start=session["date_start"], date_end=session["date_end"])
+            db.session.add(new_request)
+            db.session.commit()
+            return redirect("/")
+        else:
+            print("Invalid number")
+            # block form from submitting in js
+            flash("Please enter a valid phone number")
+            return redirect("/")
+            # or validate phone with regex in jinja and here
     
 
 if __name__ == "__main__":
-
     # Change to False for demo
     app.debug = True
-
     connect_to_db(app)
-
     # Use the DebugToolbar
     DebugToolbarExtension(app)
-
     app.run(host="0.0.0.0")
