@@ -62,7 +62,6 @@ def process_dates():
     # Get form variables
         date_start = request.form["date-start"]
         date_end = request.form["date-end"]
-        print(date_start, date_end, session['site_name'])
         session["date_start"] = date_start
         session["date_end"] = date_end
 
@@ -87,9 +86,21 @@ def process_request():
     """Process request for campsite notification"""
     # Get form variables
     phone = request.form["phone"]
-
+    #instantiate a new User object that creates a Request and commits dates, campsite name, campsite ID
+    #use session user_id to add to the request row
     if is_valid_number(phone) == True:
-        flash("Submitted")
+        print("**", phone)
+        new_user = User(phone=phone)
+        print("***", new_user)
+        db.session.add(new_user)
+        db.session.commit()
+        test = new_user.user_id
+        
+        session["user_id"] = test
+        
+        new_request = Request(user_id=session["user_id"], campsite_id=session["site_id"], date_start=session["date_start"], date_end=session["date_end"])
+        db.session.add(new_request)
+        db.session.commit()
 
         return redirect("/")
     else:
@@ -97,7 +108,6 @@ def process_request():
         # block form from submitting in js
         flash("Please enter a valid phone number")
         return redirect("/")
-        #for now, redirect home
     # or validate phone with regex in jinja and here
     
 
