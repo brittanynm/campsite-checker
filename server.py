@@ -11,7 +11,7 @@ from flask_wtf import Form
 from wtforms import DateField
 from datetime import date
 from lookup import is_valid_number
-import api
+from api import availability, get_num_available_sites
 
 app = Flask(__name__)
 
@@ -53,7 +53,7 @@ def search():
 
 @app.route('/dates', methods=['GET', 'POST'])
 def process_dates():
-    """Process dates selected"""
+    """Collect target dates"""
     if request.method == 'GET':
         campsite_name = request.args.get("query")
         return render_template("calendar.html", 
@@ -74,16 +74,22 @@ def process_dates():
 def submission_form():
     """Collect phone number and display previous selections"""
     if request.method == 'GET':
-        # additionally display current availability
+        # display current availability
+        resp = availability(session["date_start"], session["date_end"], session["site_id"])
+        available = get_num_available_sites(resp, session["date_start"], session["date_end"])
+        # if available == False:
+        #     available = "0 sites available"
+        # else:
+        #     available = "Sites are currently available. Go to recreation.gov to book!"
+
         return render_template("submission_form.html", 
                             site_name=session['site_name'],
                             date_start=session["date_start"], 
-                            date_end=session["date_end"])
+                            date_end=session["date_end"],
+                            available=available)
     else:
         # Get form variables
         phone = request.form["phone"]
-        #instantiate a new User object that creates a Request and commits dates, campsite name, campsite ID
-        #use session user_id to add to the request row
         if is_valid_number(phone) == True:
             new_user = User(phone=phone)
             db.session.add(new_user)

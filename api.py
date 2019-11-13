@@ -24,7 +24,7 @@ def availability(date_start, date_end, site_id):
 def get_num_available_sites(resp, start_date, end_date):
     maximum = resp["count"]
     num_available = 0
-    
+
     for site in resp["campsites"].values():
         available = bool(len(site["availabilities"]))
         for key, status in site["availabilities"].items():
@@ -34,6 +34,8 @@ def get_num_available_sites(resp, start_date, end_date):
         if available:
             num_available += 1
     print(num_available, "site(s) available out of", maximum, "site(s)")
+    return f'{num_available} sites available out of {maximum} sites'
+    
 
 
 resp = availability('2019-12-01', '2019-12-04', '234513')
