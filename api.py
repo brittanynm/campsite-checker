@@ -33,17 +33,10 @@ def get_num_available_sites(resp, start_date, end_date):
         if available:
             num_available += 1
     print(num_available, "site(s) available out of", maximum, "site(s)")
-    return f'{num_available} sites available out of {maximum} sites'
+    return f'{num_available} site(s) available out of {maximum} site(s)'
     
 
 resp = check_availability('2019-12-01', '2019-12-04', '234513')
 get_num_available_sites(resp, '2019-12-01', '2019-12-04')
-
-
-# def send_avail_request(url, params):
-#     payload = {}
-#     request = requests.get(url, params=payload)
-
-#     return response.json
 
 

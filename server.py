@@ -96,8 +96,7 @@ def submission_form():
             db.session.add(new_request)
             db.session.commit()
             # set up scheduled check
-            if scheduled_request(date_start, date_end, site_id, user_id) == True:
-                send_text(phone, )
+            send_text(phone)
 
             return redirect("/")
         else:
@@ -105,7 +104,6 @@ def submission_form():
             # block form from submitting in js
             flash("Please enter a valid phone number")
             return redirect("/")
-            # or validate phone with regex in jinja and here
     
 
 if __name__ == "__main__":
