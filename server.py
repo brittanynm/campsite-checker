@@ -39,7 +39,6 @@ def search():
     else:
         selected_site = request.form["selected_site"]
         session["site_id"] = selected_site
-        #query db for campsite_id and set into session
         site_obj = Campsite.query.filter_by(id = selected_site).one()
         site_name = site_obj.name
         session["site_name"] = site_name
@@ -58,7 +57,6 @@ def process_dates():
                                 site_name=session["site_name"], 
                                 park_name=session["park_name"])
     else:
-    # Get form variables
         date_start = request.form["date-start"]
         date_end = request.form["date-end"]
         session["date_start"] = date_start
@@ -85,7 +83,6 @@ def submission_form():
                             available=available)
     else:
         phone = request.form["phone"]
-        # add request and user to db
         if is_valid_number(phone) == True:
             new_user = User(phone=phone)
             db.session.add(new_user)
@@ -97,7 +94,6 @@ def submission_form():
             db.session.commit()
             # set up scheduled check
             send_text(phone)
-
             return redirect("/")
         else:
             print("Invalid number")

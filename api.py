@@ -14,7 +14,6 @@ headers = {'User-Agent': user_agent}
 def check_availability(date_start, date_end, site_id):
     query = "?start_date=" + date_start + "T00%3A00%3A00.000Z&end_date=" + date_end + "T00%3A00%3A00.000Z"
     url = BASE_URL + AVAILABILITY_ENDPOINT + site_id + query
-
     resp = requests.get(url, headers=headers)
     
     return resp.json()
@@ -35,8 +34,8 @@ def get_num_available_sites(resp, start_date, end_date):
     print(num_available, "site(s) available out of", maximum, "site(s)")
     return f'{num_available} site(s) available out of {maximum} site(s)'
     
-
-resp = check_availability('2019-12-01', '2019-12-04', '234513')
-get_num_available_sites(resp, '2019-12-01', '2019-12-04')
+# Uncomment to test
+# resp = check_availability('2019-12-01', '2019-12-04', '234513')
+# get_num_available_sites(resp, '2019-12-01', '2019-12-04')
 
 
