@@ -12,6 +12,7 @@ from wtforms import DateField
 from datetime import date
 from lookup import is_valid_number
 from api import check_availability, get_num_available_sites
+from schedule_check import *
 
 app = Flask(__name__)
 
@@ -72,6 +73,7 @@ def submission_form():
     if request.method == 'GET':
         resp = check_availability(session["date_start"], session["date_end"], session["site_id"])
         available = get_num_available_sites(resp, session["date_start"], session["date_end"])
+        print(available)
         # if available == False:
         #     available = "0 sites available"
         # else:
@@ -83,6 +85,7 @@ def submission_form():
                             available=available)
     else:
         phone = request.form["phone"]
+        # add request and user to db
         if is_valid_number(phone) == True:
             new_user = User(phone=phone)
             db.session.add(new_user)
@@ -92,7 +95,10 @@ def submission_form():
             new_request = Request(user_id=session["user_id"], campsite_id=session["site_id"], date_start=session["date_start"], date_end=session["date_end"])
             db.session.add(new_request)
             db.session.commit()
-            
+            # set up scheduled check
+            if scheduled_request(date_start, date_end, site_id, user_id) == True:
+                send_text(phone, )
+
             return redirect("/")
         else:
             print("Invalid number")
