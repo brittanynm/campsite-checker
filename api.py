@@ -23,6 +23,7 @@ def check_availability(date_start, date_end, site_id):
 
 def get_num_available_sites(resp, start_date, end_date):
     '''Using the API response, return number of sites available out of total sites'''
+    
     maximum = resp["count"]
     num_available = 0
 

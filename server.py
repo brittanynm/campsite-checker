@@ -22,7 +22,7 @@ app.jinja_env.undefined = StrictUndefined
 
 @app.route('/', methods=['GET'])
 def index():
-    """Show homepage and form for campsite search"""
+    """Show homepage and campsite search"""
     campsites = Campsite.query.all()
 
     return render_template("homepage.html", campsites=campsites)
@@ -30,7 +30,7 @@ def index():
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
-    """Process campsite search"""
+    """Filter search and process selection"""
     if request.method == 'GET':
         campsite_name = request.args.get("query")
         q = Campsite.query
@@ -50,7 +50,7 @@ def search():
 
 @app.route('/dates', methods=['GET', 'POST'])
 def process_dates():
-    """Collect target dates"""
+    """Collect check in and check out dates"""
     if request.method == 'GET':
         campsite_name = request.args.get("query")
         return render_template("calendar.html", 
@@ -67,7 +67,7 @@ def process_dates():
 
 @app.route('/submit', methods=['GET', 'POST'])
 def submission_form():
-    """Collect phone number and display previous selections with availability"""
+    """Display previous selections, collect phone number, and commit to db"""
     if request.method == 'GET':
         resp = check_availability(session["date_start"], session["date_end"], session["site_id"])
         available = get_num_available_sites(resp, session["date_start"], session["date_end"])
