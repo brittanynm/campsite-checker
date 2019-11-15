@@ -2,11 +2,14 @@ from model import *
 from flask import Flask
 import schedule
 import requests, json, time
-from twilio.rest import Client
 from server import *
 from api import check_availability, get_num_available_sites
 from datetime import date
+from twilio.rest import Client
+import os
 
+account_sid = os.environ['TWILIO_ACCOUNT_SID']
+auth_token = os.environ['TWILIO_AUTH_TOKEN']
 client = Client(account_sid, auth_token)
 
 def job():
