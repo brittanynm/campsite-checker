@@ -14,9 +14,8 @@ client = Client(account_sid, auth_token)
 def job():
     '''Pulls all requests that are in the future and sorts by created_at'''
     date_today = date.today()
-    subscriptions = Request.query.filter(Request.date_end < date_today)
-    subscriptions = subscriptions.order_by(Request.created_at.desc())
-    print(subscriptions)
+    subscriptions = Request.query.filter(Request.date_end > date_today).all()
+    # subscriptions = subscriptions.order_by(Request.created_at.desc())
     for subscription in subscriptions:
         date_start, date_end, campsite_id = subscription.date_start, subscription.date_end, subscription.campsite_id
         resp = check_availability(date_start, date_end, campsite_id)
@@ -24,12 +23,13 @@ def job():
             available = bool(len(site["availabilities"]))
             if available:
                 #update available column in requests to True
-                Request.available = True
+                subscription.available = True
                 #query for user phone number
-                phone = Request.phone
+                user_id = User.query.filter(User.user_id == subscription.user_id).one()
+                phone = user_id.phone
                 #send text to user
                 send_text(phone)
-                #remove schedule
+                
 
 def send_text(phone):
     message = client.messages \

@@ -94,7 +94,6 @@ def submission_form():
             db.session.add(new_request)
             db.session.commit()
             # set up scheduled check in a different file
-            
             return redirect("/")
         else:
             print("Invalid number")
