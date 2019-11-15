@@ -8,7 +8,6 @@ from flask_debugtoolbar import DebugToolbarExtension
 from model import connect_to_db, db, User, Campsite, Request
 
 from flask_wtf import Form
-from wtforms import DateField
 from datetime import date
 from lookup import is_valid_number
 from api import check_availability, get_num_available_sites
@@ -73,10 +72,6 @@ def submission_form():
         resp = check_availability(session["date_start"], session["date_end"], session["site_id"])
         available = get_num_available_sites(resp, session["date_start"], session["date_end"])
         print(available)
-        # if available == False:
-        #     available = "0 sites available"
-        # else:
-        #     available = "Sites are currently available. Go to recreation.gov to book!"
         return render_template("submission_form.html", 
                             site_name=session['site_name'],
                             date_start=session["date_start"], 
@@ -93,7 +88,6 @@ def submission_form():
             new_request = Request(user_id=session["user_id"], campsite_id=session["site_id"], date_start=session["date_start"], date_end=session["date_end"])
             db.session.add(new_request)
             db.session.commit()
-            # set up scheduled check in a different file
             return redirect("/")
         else:
             print("Invalid number")

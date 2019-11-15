@@ -12,7 +12,7 @@ auth_token = 'cc3dc5e4307e313577af1029959f7a87'
 client = Client(account_sid, auth_token)
 
 def job():
-    '''Pulls all requests that are in the future and sorts by created_at'''
+    '''Pulls all requests that are in the future and checks availability'''
     date_today = date.today()
     subscriptions = Request.query.filter(Request.date_end > date_today).all()
     # subscriptions = subscriptions.order_by(Request.created_at.desc())
@@ -32,6 +32,7 @@ def job():
                 
 
 def send_text(phone):
+    '''Sends user a text letting them know their is availability'''
     message = client.messages \
                 .create(
                      body='There is availability at your campsite! Go to www.recreation.gov to book as soon as possible!',
