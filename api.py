@@ -13,7 +13,6 @@ headers = {'User-Agent': user_agent}
 
 def check_availability(date_start, date_end, site_id):
     '''Send availability request to recreation.gov'''
-
     query = "?start_date=" + date_start + "T00%3A00%3A00.000Z&end_date=" + date_end + "T00%3A00%3A00.000Z"
     url = BASE_URL + AVAILABILITY_ENDPOINT + site_id + query
     resp = requests.get(url, headers=headers)
@@ -23,7 +22,6 @@ def check_availability(date_start, date_end, site_id):
 
 def get_num_available_sites(resp, start_date, end_date):
     '''Using the API response, return number of sites available out of total sites'''
-    
     maximum = resp["count"]
     num_available = 0
 
