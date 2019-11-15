@@ -13,6 +13,7 @@ from datetime import date
 from lookup import is_valid_number
 from api import check_availability, get_num_available_sites
 from schedule_check import *
+import schedule
 
 app = Flask(__name__)
 
@@ -92,8 +93,8 @@ def submission_form():
             new_request = Request(user_id=session["user_id"], campsite_id=session["site_id"], date_start=session["date_start"], date_end=session["date_end"])
             db.session.add(new_request)
             db.session.commit()
-            # set up scheduled check
-            send_text(phone)
+            # set up scheduled check in a different file
+            
             return redirect("/")
         else:
             print("Invalid number")
@@ -107,4 +108,5 @@ if __name__ == "__main__":
     app.debug = True
     connect_to_db(app)
     DebugToolbarExtension(app)
+    schedule.run_pending() 
     app.run(host="0.0.0.0")
