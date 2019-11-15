@@ -7,8 +7,6 @@ from server import *
 from api import check_availability, get_num_available_sites
 from datetime import date
 
-account_sid = 'AC8c5ba618686ac695cb965f2d3830354e'
-auth_token = 'cc3dc5e4307e313577af1029959f7a87'
 client = Client(account_sid, auth_token)
 
 def job():
