@@ -14,7 +14,7 @@ client = Client(account_sid, auth_token)
 def job():
     '''Pulls all requests that are in the future and checks availability'''
     date_today = date.today()
-    subscriptions = Request.query.filter(Request.date_end > date_today).all()
+    subscriptions = Request.query.filter(Request.date_end > date_today, Request.available == False).all()
     # subscriptions = subscriptions.order_by(Request.created_at.desc())
     for subscription in subscriptions:
         date_start, date_end, campsite_id = subscription.date_start, subscription.date_end, subscription.campsite_id
