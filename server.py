@@ -90,7 +90,7 @@ def submission_form():
         )
     else:
         phone = request.form["phone"]
-        if is_valid_number(phone) == True:
+        if is_valid_number(phone) is True:
             new_user = User(phone=phone)
             db.session.add(new_user)
             db.session.commit()

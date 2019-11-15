@@ -20,7 +20,7 @@ def job():
     """Pulls all requests that are in the future and checks availability"""
     date_today = date.today()
     subscriptions = (
-        Request.query.filter(Request.date_end > date_today, Request.available == False)
+        Request.query.filter(Request.date_end > date_today, Request.available is False)
         .order_by(Request.created_at.desc())
         .all()
     )
