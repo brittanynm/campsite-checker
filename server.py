@@ -2,7 +2,7 @@
 
 from jinja2 import StrictUndefined
 
-from flask import Flask, render_template, request, flash, redirect, session
+from flask import Flask, render_template, request, flash, redirect, session, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, User, Campsite, Request
@@ -11,8 +11,6 @@ from flask_wtf import Form
 from datetime import date
 from lookup import is_valid_number
 from api import check_availability, get_num_available_sites
-from schedule_check import *
-import schedule
 
 app = Flask(__name__)
 
@@ -40,6 +38,7 @@ def search():
         ).all()
         return render_template("homepage.html", campsites=campsites)
     else:
+
         selected_site = request.form["selected_site"]
         session["site_id"] = selected_site
         site_obj = Campsite.query.filter_by(id=selected_site).one()
@@ -49,6 +48,21 @@ def search():
         session["park_name"] = park_name
 
     return redirect("/dates")
+
+
+@app.route("/live_search", methods=["GET"])
+def live_search():
+    campsite_name = request.args.get("query")
+    q = Campsite.query
+    campsites = q.filter(
+        (Campsite.name.ilike(f"%{campsite_name}%"))
+        | (Campsite.park.ilike(f"%{campsite_name}%"))
+        ).all()
+    results = {}
+    for idx, campsite in enumerate(campsites):
+        results[idx] = {'name': campsite.name, 'park':campsite.park, 'id':campsite.id}
+
+    return jsonify(results)
 
 
 @app.route("/dates", methods=["GET", "POST"])
@@ -117,5 +131,4 @@ if __name__ == "__main__":
     app.debug = True
     connect_to_db(app)
     DebugToolbarExtension(app)
-    schedule.run_pending()
     app.run(host="0.0.0.0")

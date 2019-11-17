@@ -53,7 +53,7 @@ def send_text(phone):
     )
 
 
-schedule.every(10).seconds.do(job)
+schedule.every(1).minute.do(job)
 
 while True:
     print("Check")
