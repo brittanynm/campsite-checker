@@ -1,4 +1,11 @@
 {% extends 'base.html' %}
+
+{% block head %}
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+{% endblock %}
+
 {% block content %}
 
 
@@ -7,14 +14,14 @@
 </div>
 
 <div class="row">
-
+    <div id="root"></div>
+{#
     <div class="col-sm-3 col-sm-offset-1 name-sidebar">
         <div class="sidebar-module sidebar-module-inset"><br><br>
             <form class="form-inline" method = "GET" action="/search">
                 <div class="form-group">
                     <label for="query">Where do you want to go? </label>
                     <input type="text" name="query" class="form-control" id="query">
-
                 </div>
                 <button type="submit" class="btn btn-primary">Search</button><br><br>
             </form><br><br>
@@ -33,10 +40,10 @@
             {% endfor %}
             <button type="submit" class = "btn btn-selection">Next > </button><br><br>
            </div>
-    </form>
+    </form> #}
 
 </div>
-  
-<script src='/static/js/live_search.js'></script>
+
+<script type="text/jsx" src='/static/js/live_search.jsx'></script>
 
 {% endblock %}

@@ -59,8 +59,8 @@ def live_search():
         | (Campsite.park.ilike(f"%{campsite_name}%"))
         ).all()
     results = {}
-    for idx, campsite in enumerate(campsites):
-        results[idx] = {'name': campsite.name, 'park':campsite.park, 'id':campsite.id}
+    for campsite in campsites:
+        results[campsite.id] = {'name': campsite.name, 'park':campsite.park, 'id':campsite.id}
 
     return jsonify(results)
 
