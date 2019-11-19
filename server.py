@@ -39,13 +39,16 @@ def search():
         return render_template("homepage.html", campsites=campsites)
     else:
 
-        selected_site = request.form["selected_site"]
-        session["site_id"] = selected_site
-        site_obj = Campsite.query.filter_by(id=selected_site).one()
-        site_name = site_obj.name
-        session["site_name"] = site_name
-        park_name = site_obj.park
-        session["park_name"] = park_name
+        selected_site = request.form.getlist("selected_site")
+        print(selected_site)
+        for item in selected_site:
+            session["site_id"] = item
+            # site_obj = Campsite.query.filter_by(id=selected_site).all()
+            # print("***", site_obj)
+            # site_name = site_obj.name
+            # session["site_name"] = site_name
+            # park_name = site_obj.park
+            # session["park_name"] = park_name
 
     return redirect("/dates")
 
@@ -63,6 +66,16 @@ def live_search():
         results[campsite.id] = {'name': campsite.name, 'park':campsite.park, 'id':campsite.id}
 
     return jsonify(results)
+
+# @app.route("/original_display", methods=["GET"])
+# def original_display():
+#     q = Campsite.query
+#     campsites = q.filter(
+#         (Campsite.park.ilike("yosemite"))
+#         | (Campsite.park.ilike("joshua tree"))
+#         ).all()
+
+#     print(campsites)
 
 
 @app.route("/dates", methods=["GET", "POST"])
