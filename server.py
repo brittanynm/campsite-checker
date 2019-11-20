@@ -21,7 +21,6 @@ app.jinja_env.undefined = StrictUndefined
 @app.route("/", methods=["GET"])
 def index():
     """Show homepage and campsite search"""
-    # campsites = Campsite.query.filter(Campsite.park.ilike('Yosemite')).all()
     campsites = Campsite.query.all()
     return render_template("homepage.html", campsites=campsites)
 
@@ -51,7 +50,7 @@ def live_search():
     campsites = q.filter(
         (Campsite.name.ilike(f"%{campsite_name}%"))
         | (Campsite.park.ilike(f"%{campsite_name}%"))
-        ).limit(15).all()
+        ).limit(100).all()
     results = {}
     for campsite in campsites:
         results[campsite.id] = {'name': campsite.name, 'park':campsite.park, 'id':campsite.id}
