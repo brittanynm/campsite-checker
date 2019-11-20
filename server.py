@@ -21,8 +21,8 @@ app.jinja_env.undefined = StrictUndefined
 @app.route("/", methods=["GET"])
 def index():
     """Show homepage and campsite search"""
+    # campsites = Campsite.query.filter(Campsite.park.ilike('Yosemite')).all()
     campsites = Campsite.query.all()
-
     return render_template("homepage.html", campsites=campsites)
 
 
@@ -40,22 +40,6 @@ def search():
     else:
         site_list = request.form.getlist("selected_site")
         session["campsites"] = site_list
-        print(session["campsites"])
-        # for item in site_list:
-        #     site_obj = Campsite.query.filter_by(id=item).one()
-        #     site_name = site_obj.name
-        #     park_name = site_obj.park
-
-            # session[item] = item
-            # selected_site = session[item]
-            # print("id", selected_site)
-            # site_obj = Campsite.query.filter_by(id=selected_site).one()
-            # print("object", site_obj)
-            # session["site_name"] = site_obj.name
-            # print("name", session["site_name"])
-            # park_name = site_obj.park
-            # session["park_name"] = site_obj.park
-            # print("park", session["park_name"])
 
     return redirect("/dates")
 
@@ -79,10 +63,13 @@ def live_search():
 #     q = Campsite.query
 #     campsites = q.filter(
 #         (Campsite.park.ilike("yosemite"))
-#         | (Campsite.park.ilike("joshua tree"))
 #         ).all()
 
-#     print(campsites)
+#     results = {}
+#     for campsite in campsites:
+#         results[campsite.id] = {'name': campsite.name, 'park':campsite.park, 'id':campsite.id}
+
+#     return jsonify(results)
 
 
 @app.route("/dates", methods=["GET", "POST"])
@@ -111,8 +98,6 @@ def submission_form():
         for campsite in session["campsites"]:
             site_obj = Campsite.query.filter_by(id=campsite).one()
             list_of_objs.append(site_obj)
-            # name = site_obj.name
-            # park = site_obj.park
             resp = check_availability(
                 session["date_start"], session["date_end"], campsite
             )
@@ -120,9 +105,7 @@ def submission_form():
                 resp, session["date_start"], session["date_end"]
             )
             available_list.append(available)
-        # session["list_of_objs"] = list_of_objs
-        print("**OBJECTS", list_of_objs)
-
+        
         return render_template(
             "submission_form.html",
             campsites=session["campsites"],
@@ -139,10 +122,10 @@ def submission_form():
             db.session.commit()
             user_id = new_user.user_id
             session["user_id"] = user_id
-            for obj in list_of_objs:
+            for site in session["campsites"]:
                 new_request = Request(
                     user_id=session["user_id"],
-                    campsite_id=obj.id,
+                    campsite_id=site,
                     date_start=session["date_start"],
                     date_end=session["date_end"],
                 )
