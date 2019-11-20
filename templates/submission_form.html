@@ -2,11 +2,17 @@
 {% block content %}
 <br><br>
 <div>
-    REQUEST DETAILS<br><br>
-    {{ site_name }}<br>
-    {{ session['park_name'] }}<br>
-    {{ date_start }} through {{ date_end }}<br><br>
-    {{ available }}<br>
+    <h3>REQUEST DETAILS</h2><br>
+
+    <b>{{ date_start }} through {{ date_end }}<br><br></b>
+
+    {% for campsite in list_of_objs %}
+
+        <b>{{ campsite.name }} in {{ campsite.park }}</b><br>
+        {{ available[loop.index0] }}<br><br>
+
+    {% endfor %}
+
     <a href='https://www.recreation.gov/'> recreation.gov</a><br>
 </div><br>
 

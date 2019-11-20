@@ -38,17 +38,24 @@ def search():
         ).all()
         return render_template("homepage.html", campsites=campsites)
     else:
+        site_list = request.form.getlist("selected_site")
+        session["campsites"] = site_list
+        print(session["campsites"])
+        # for item in site_list:
+        #     site_obj = Campsite.query.filter_by(id=item).one()
+        #     site_name = site_obj.name
+        #     park_name = site_obj.park
 
-        selected_site = request.form.getlist("selected_site")
-        print(selected_site)
-        for item in selected_site:
-            session["site_id"] = item
-            # site_obj = Campsite.query.filter_by(id=selected_site).all()
-            # print("***", site_obj)
-            # site_name = site_obj.name
-            # session["site_name"] = site_name
+            # session[item] = item
+            # selected_site = session[item]
+            # print("id", selected_site)
+            # site_obj = Campsite.query.filter_by(id=selected_site).one()
+            # print("object", site_obj)
+            # session["site_name"] = site_obj.name
+            # print("name", session["site_name"])
             # park_name = site_obj.park
-            # session["park_name"] = park_name
+            # session["park_name"] = site_obj.park
+            # print("park", session["park_name"])
 
     return redirect("/dates")
 
@@ -79,14 +86,12 @@ def live_search():
 
 
 @app.route("/dates", methods=["GET", "POST"])
-def process_dates():
+def date_selector():
     """Collect check in and check out dates"""
     if request.method == "GET":
         campsite_name = request.args.get("query")
         return render_template(
-            "calendar.html",
-            site_name=session["site_name"],
-            park_name=session["park_name"],
+            "calendar.html"
         )
     else:
         date_start = request.form["date-start"]
@@ -101,19 +106,30 @@ def process_dates():
 def submission_form():
     """Display previous selections, collect phone number, and commit to db"""
     if request.method == "GET":
-        resp = check_availability(
-            session["date_start"], session["date_end"], session["site_id"]
-        )
-        available = get_num_available_sites(
-            resp, session["date_start"], session["date_end"]
-        )
-        print(available)
+        list_of_objs = []
+        available_list = []
+        for campsite in session["campsites"]:
+            site_obj = Campsite.query.filter_by(id=campsite).one()
+            list_of_objs.append(site_obj)
+            # name = site_obj.name
+            # park = site_obj.park
+            resp = check_availability(
+                session["date_start"], session["date_end"], campsite
+            )
+            available = get_num_available_sites(
+                resp, session["date_start"], session["date_end"]
+            )
+            available_list.append(available)
+        # session["list_of_objs"] = list_of_objs
+        print("**OBJECTS", list_of_objs)
+
         return render_template(
             "submission_form.html",
-            site_name=session["site_name"],
+            campsites=session["campsites"],
+            list_of_objs=list_of_objs,
             date_start=session["date_start"],
             date_end=session["date_end"],
-            available=available,
+            available=available_list
         )
     else:
         phone = request.form["phone"]
@@ -123,14 +139,17 @@ def submission_form():
             db.session.commit()
             user_id = new_user.user_id
             session["user_id"] = user_id
-            new_request = Request(
-                user_id=session["user_id"],
-                campsite_id=session["site_id"],
-                date_start=session["date_start"],
-                date_end=session["date_end"],
-            )
-            db.session.add(new_request)
-            db.session.commit()
+            for obj in list_of_objs:
+                new_request = Request(
+                    user_id=session["user_id"],
+                    campsite_id=obj.id,
+                    date_start=session["date_start"],
+                    date_end=session["date_end"],
+                )
+                db.session.add(new_request)
+                #convert campsite list to set before comitting to db
+                db.session.commit()
+                # clear individual keys for session
             return redirect("/")
         else:
             print("Invalid number")
