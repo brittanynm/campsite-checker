@@ -55,7 +55,7 @@ class Request(db.Model):
     date_end = db.Column(db.DateTime)
     num_nights = db.Column(db.Integer)
     available = db.Column(db.Boolean, default=False)
-    # sms_sent = db.Column(db.Boolean, default=False)
+    sms_sent = db.Column(db.Boolean, default=False)
     user = db.relationship("User")
 
     def __repr__(self):

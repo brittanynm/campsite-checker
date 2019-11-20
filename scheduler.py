@@ -20,7 +20,7 @@ def job():
     """Pulls all requests that are in the future and checks availability"""
     date_today = date.today()
     subscriptions = (
-        Request.query.filter(Request.date_end > date_today, Request.available is False)
+        Request.query.filter(Request.date_end > date_today, Request.sms_sent is False)
         .order_by(Request.created_at.desc())
         .all()
     )
@@ -30,7 +30,6 @@ def job():
             subscription.date_end,
             subscription.campsite_id,
         )
-        print(date_end)
         resp = check_availability(date_start, date_end, campsite_id)
         for site in resp["campsites"].values():
             available = bool(len(site["availabilities"]))
@@ -41,6 +40,7 @@ def job():
         user_id = User.query.filter(User.user_id == subscription.user_id).one()
         phone = user_id.phone
         send_text(phone)
+        subscription.sms_sent = True
 
 
 def send_text(phone):

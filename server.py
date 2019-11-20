@@ -51,7 +51,7 @@ def live_search():
     campsites = q.filter(
         (Campsite.name.ilike(f"%{campsite_name}%"))
         | (Campsite.park.ilike(f"%{campsite_name}%"))
-        ).all()
+        ).limit(15).all()
     results = {}
     for campsite in campsites:
         results[campsite.id] = {'name': campsite.name, 'park':campsite.park, 'id':campsite.id}
