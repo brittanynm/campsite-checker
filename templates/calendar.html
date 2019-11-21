@@ -1,16 +1,37 @@
+
 {% extends 'base.html' %}
 {% block content %}
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/css/lightpick.css">
+</head>
 <body>
+
+
     <br><br>
     <form action="/dates" method="POST">
         <div>When would you like to go?</div><br>
-        <label for="start">Arrive:</label>
-            <input type="date" id="theDate" name="date-start"
-        <label for="end" required>Depart:</label>
-            <input type="date" id="start" name="date-end" required><br><br>
+        <label for="start"></label>
+            <input type="text" value= "Select dates" id="demo" name="date-start"><br><br>
+        <!-- <label for="end" required>Depart:</label>
+            <input type="text" id="start" name="date-end" required><br><br> -->
         <button type="submit" class="date-selection">Next > </button>
     </form>
+
 </body> 
-  <script src="datepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+<script src="https://unpkg.com/lightpick@latest/lightpick.js"></script>
+<script>
+    const myPicker = new Lightpick({
+      field: document.getElementById('demo'),
+      singleDate: false,
+      startDate: null,
+      endDate: null,
+      inline: true,
+      format: 'MM/DD/YYYY'
+});
+
+</script>
 
 {% endblock %}
+
+

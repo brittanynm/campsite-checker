@@ -7,7 +7,6 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, User, Campsite, Request
 
-from flask_wtf import Form
 from datetime import date
 from lookup import is_valid_number
 from api import check_availability, get_num_available_sites
