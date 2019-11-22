@@ -16,13 +16,14 @@ def check_availability(date_start, date_end, site_id):
     """Send availability request to recreation.gov"""
     query = (
         "?start_date="
-        # + date_start.strftime("%Y-%m-%d")
-        + date_start
+        + date_start.strftime("%Y-%m-%d")
+        # + date_start
         + "T00%3A00%3A00.000Z&end_date="
-        # + date_end.strftime("%Y-%m-%d")
-        + date_end
+        + date_end.strftime("%Y-%m-%d")
+        # + date_end
         + "T00%3A00%3A00.000Z"
     )
+    print("***", query)
 
     url = BASE_URL + AVAILABILITY_ENDPOINT + site_id + query
     resp = requests.get(url, headers=headers)
@@ -30,7 +31,7 @@ def check_availability(date_start, date_end, site_id):
     return resp.json()
 
 
-def get_num_available_sites(resp, start_date, end_date):
+def get_num_available_sites(resp, date_start, date_end):
     """Using the API response, return number of sites available out of total sites"""
     maximum = resp["count"]
     num_available = 0

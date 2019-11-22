@@ -7,7 +7,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, User, Campsite, Request
 
-from datetime import date
+import datetime
 from lookup import is_valid_number
 from api import check_availability, get_num_available_sites
 
@@ -80,10 +80,14 @@ def date_selector():
         )
     else:
         date_start = request.form["date-start"]
-        date_end = request.form["date-end"]
+        dates = date_start.split(" - ")
+        date_start = dates[0]
+        date_end = dates[1]
         session["date_start"] = date_start
         session["date_end"] = date_end
-
+        session["date_start_dt"] = datetime.datetime.strptime(date_start, '%m/%d/%Y')
+        session["date_end_dt"] = datetime.datetime.strptime(date_end, '%m/%d/%Y')
+        print("***", session["date_end_dt"])
         return redirect("/submit")
 
 
@@ -97,10 +101,10 @@ def submission_form():
             site_obj = Campsite.query.filter_by(id=campsite).one()
             list_of_objs.append(site_obj)
             resp = check_availability(
-                session["date_start"], session["date_end"], campsite
+                session["date_start_dt"], session["date_end_dt"], campsite
             )
             available = get_num_available_sites(
-                resp, session["date_start"], session["date_end"]
+                resp, session["date_start_dt"], session["date_end_dt"]
             )
             available_list.append(available)
         
@@ -120,6 +124,8 @@ def submission_form():
             db.session.commit()
             user_id = new_user.user_id
             session["user_id"] = user_id
+            session["date_start"] = datetime.datetime.strptime(date_start, '%m/%d/%Y')
+            session["date_end"] = datetime.datetime.strptime(date_end, '%m/%d/%Y')
             for site in session["campsites"]:
                 new_request = Request(
                     user_id=session["user_id"],
