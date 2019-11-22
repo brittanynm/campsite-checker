@@ -20,10 +20,11 @@ def job():
     """Pulls all requests that are in the future and checks availability"""
     date_today = date.today()
     subscriptions = (
-        Request.query.filter(Request.date_end > date_today, Request.sms_sent is False)
+        Request.query.filter(Request.date_end > date_today, Request.sms_sent == False)
         .order_by(Request.created_at.desc())
         .all()
     )
+    print(subscriptions)
     for subscription in subscriptions:
         date_start, date_end, campsite_id = (
             subscription.date_start,
@@ -53,7 +54,7 @@ def send_text(phone):
     )
 
 
-schedule.every(1).minute.do(job)
+schedule.every(10).seconds.do(job)
 
 while True:
     print("Check")
