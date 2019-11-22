@@ -8,12 +8,14 @@
 
 
     <br><br>
-    <form action="/dates" method="POST">
-        <div>When would you like to go?</div><br>
-        <label for="start"></label>
-            <input type="text" value= "Select dates" id="demo" name="date-start"><br><br>
+    <form action="/dates" class="flex-col" id="calendar-form" method="POST">
+        <div id="title"><h5>When would you like to go?</h5></div><br>
+        <div class="flex-col"> 
+            <input type="text" value= "Select dates" id="demo" name="date-start"><br>
+        </div>
         <!-- <label for="end" required>Depart:</label>
             <input type="text" id="start" name="date-end" required><br><br> -->
+        <br><br>
         <button type="submit" class="date-selection">Next > </button>
     </form>
 

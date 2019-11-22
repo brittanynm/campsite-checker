@@ -3,7 +3,7 @@
 .lightpick {
     position: absolute;
     z-index: 99999;
-    padding: 4px;
+    padding: 9px;
     border-radius: 4px;
     background-color: #FFF;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);

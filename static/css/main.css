@@ -1,0 +1,26 @@
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+#demo {
+    width: 296px;
+    border: 0px;
+    text-align: center;
+}
+
+.lightpick {
+    width: fit-content;
+    /*margin: 30%;*/
+}
+
+.date-selection {
+    width: fit-content;
+    align
+*/}
+#title {
+    width: 296px;
+    text-align: center;
+}
+#calendar-form {
+    padding-left: 3%;
+}
