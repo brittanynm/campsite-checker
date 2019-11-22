@@ -23,7 +23,6 @@ def check_availability(date_start, date_end, site_id):
         # + date_end
         + "T00%3A00%3A00.000Z"
     )
-    print("***", query)
 
     url = BASE_URL + AVAILABILITY_ENDPOINT + site_id + query
     resp = requests.get(url, headers=headers)

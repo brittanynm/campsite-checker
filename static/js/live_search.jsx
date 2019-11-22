@@ -29,7 +29,7 @@ class CampsiteSearch extends React.Component {
             campsiteDivs.push(
                 <div className="campsite-name" key={key}>
                     <input type="checkbox" name="selected_site" value={campsite.id}/>
-                    <b> {campsite.name}</b>
+                    <b> {campsite.name} </b>
                     {campsite.park}<hr />
                 </div>
             );

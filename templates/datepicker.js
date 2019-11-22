@@ -4,5 +4,4 @@ const myPicker = new Lightpick({
       startDate: null,
       endDate: null,
       inline: true
-      console.log("Made it")
 });

@@ -124,14 +124,14 @@ def submission_form():
             db.session.commit()
             user_id = new_user.user_id
             session["user_id"] = user_id
-            session["date_start"] = datetime.datetime.strptime(date_start, '%m/%d/%Y')
-            session["date_end"] = datetime.datetime.strptime(date_end, '%m/%d/%Y')
+            # session["date_start"] = datetime.datetime.strptime(date_start, '%m/%d/%Y')
+            # session["date_end"] = datetime.datetime.strptime(date_end, '%m/%d/%Y')
             for site in session["campsites"]:
                 new_request = Request(
                     user_id=session["user_id"],
                     campsite_id=site,
-                    date_start=session["date_start"],
-                    date_end=session["date_end"],
+                    date_start=session["date_start_dt"],
+                    date_end=session["date_end_dt"],
                 )
                 db.session.add(new_request)
                 #convert campsite list to set before comitting to db
