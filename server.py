@@ -145,6 +145,10 @@ def submission_form():
             return redirect("/")
 
 
+@app.route("/about", methods="GET")
+def about_page():
+    return render_template("about.html")
+
 if __name__ == "__main__":
     # Change to False for demo
     app.debug = True

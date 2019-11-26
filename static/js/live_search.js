@@ -18,8 +18,6 @@ async function response(evt) {
         let campsite_list = document.getElementById("campsite_list");
         let display = `<div class="list" id="campsite"><div class="campsite-name"><input type="radio" name="selected_site" value=${id} required><b>${name}</b><br>${park}<br></div></div>`;
         $('#campsite_list').html(display);
-        // search.innerHTML = display;
-        // html = $.parseHTML(display);
 
     })
 }
