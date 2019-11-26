@@ -37,13 +37,23 @@ class CampsiteSearch extends React.Component {
 
         return campsiteDivs;
     }
+    
+    submitHandler(evt) {
+        evt.preventDefault();
+    }
 
     render() {
         return (
             <div>
                 <div className="col-sm-3 col-sm-offset-1 name-sidebar">
-                    <div className="sidebar-module sidebar-module-inset"><br /><br />
-                        <form className="form-inline" method = "GET" action="/search">
+                    <div className="sidebar-module sidebar-module-inset">
+                    <br /><br />
+                        <form 
+                            onSubmit={this.submitHandler} 
+                            className="form-inline" 
+                            method = "GET" 
+                            action="/search"
+                            >
                             <div className="form-group">
                                 <label htmlFor="query">Where do you want to go? </label>
                                 <input
@@ -55,8 +65,10 @@ class CampsiteSearch extends React.Component {
                                     onChange={this.handleSearchChange}
                                 />
                             </div>
-                            <button type="submit" className="btn btn-primary">Search</button><br /><br />
+
+                            {/* <button type="submit" className="btn btn-primary">Search</button><br /><br />*/}
                         </form><br /><br />
+                        
                     </div>
                 </div>
 
@@ -64,7 +76,8 @@ class CampsiteSearch extends React.Component {
     <form className="form-inline-2" method = "POST" action="/search">
         <div className="list" id="campsite_list">
             {this.renderCampsites()}
-            <button type="submit" className = "btn btn-selection">Next > </button><br /><br />
+            <button type="submit" className = "btn btn-selection">Next > </button>
+            <br /><br />
            </div>
     </form>
 
