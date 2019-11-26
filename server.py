@@ -124,8 +124,6 @@ def submission_form():
             db.session.commit()
             user_id = new_user.user_id
             session["user_id"] = user_id
-            # session["date_start"] = datetime.datetime.strptime(date_start, '%m/%d/%Y')
-            # session["date_end"] = datetime.datetime.strptime(date_end, '%m/%d/%Y')
             for site in session["campsites"]:
                 new_request = Request(
                     user_id=session["user_id"],
@@ -145,7 +143,7 @@ def submission_form():
             return redirect("/")
 
 
-@app.route("/about", methods="GET")
+@app.route("/about", methods=["GET"])
 def about_page():
     return render_template("about.html")
 

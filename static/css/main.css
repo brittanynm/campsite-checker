@@ -27,3 +27,26 @@
 #home-title {
     font-size: large;
 }
+
+h1, h2, h3, body {
+            font-family: 'CenturyGothic', sans-serif;
+        }
+        body {
+            margin:1%;
+            padding:1%;
+        }
+        .form-inline-2 {
+            margin-left:7%;
+            padding:1%;
+        }
+        .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+            background-color: #ffffff !important;
+            color: #999999;
+            border-color: #000000;
+            border-radius: 0;
+
+        }   
+        .navbar-brand {
+            color: #FFDCB8
+        }
+
