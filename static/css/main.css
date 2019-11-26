@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
 }
+
 #demo {
     width: 296px;
     border: 0px;
@@ -10,24 +11,38 @@
 
 .lightpick {
     width: fit-content;
-    /*margin: 30%;*/
 }
 
 .date-selection {
     width: fit-content;
     align
 */}
+
 #title {
     width: 296px;
     text-align: center;
 }
+
 #calendar-form {
     padding-left: 3%;
 }
+
 #home-title {
     font-size: large;
 }
+#About {
+    padding-top: 5%;
+    padding-left: 2%;
+    padding-bottom: 5%;
 
+}
+
+#About-me {
+    padding-top: 2%;
+    padding-left: 2%;
+    padding-bottom: 2%;
+
+}
 h1, h2, h3, body {
             font-family: 'CenturyGothic', sans-serif;
         }
