@@ -66,7 +66,7 @@ class Request(db.Model):
 def connect_to_db(app):
     """Connect to database"""
 
-    app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql:///camping"
+    app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql:///testdb"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config["SQLALCHEMY_ECHO"] = False
 
