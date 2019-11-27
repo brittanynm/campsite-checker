@@ -22,10 +22,6 @@ class FlaskTests(TestCase):
         result = self.client.get("/dates")
         self.assertIn(b"When would you like to go", result.data)
 
-    def test_date_selector(self):
-        result = self.client.get("/submit")
-        self.assertIn(b"REQUEST DETAILS", result.data)
-
     def tearDown(self):
         """Do at end of every test."""
 
