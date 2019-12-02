@@ -16,10 +16,31 @@
     <a href='https://www.recreation.gov/'> recreation.gov</a><br>
 </div><br>
 
-<form class="submit-request" method="POST" >
+<form action="/submit" class="submit-request" id="submit-form" method="POST" >
     Phone number to alert: 
     <input type="text" name="phone"><br><br>
+    <div id="test">
+        
+    </div>
     <button type="submit">Submit Request </button>
 
 </form>
+<script>
+    $("#submit-form").on("submit", 
+        (evt) => { 
+            evt.preventDefault();
+            evt.stopPropagation();
+            $.get("/validate-phone-number.json", {"phone": $("#submit-form input").val()}, (resp) => {
+                if (resp.is_valid) {
+                    evt.target.submit();
+                } else {
+                    $("#test").html("Invalid phone number!");
+                }
+                
+            })
+        }
+    );
+
+
+</script>
 {% endblock %}

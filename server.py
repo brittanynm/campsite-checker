@@ -10,6 +10,7 @@ from model import connect_to_db, db, User, Campsite, Request
 import datetime
 from lookup import is_valid_number
 from api import check_availability, get_num_available_sites
+from helpers import *
 
 app = Flask(__name__)
 
@@ -56,19 +57,6 @@ def live_search():
 
     return jsonify(results)
 
-# @app.route("/original_display", methods=["GET"])
-# def original_display():
-#     q = Campsite.query
-#     campsites = q.filter(
-#         (Campsite.park.ilike("yosemite"))
-#         ).all()
-
-#     results = {}
-#     for campsite in campsites:
-#         results[campsite.id] = {'name': campsite.name, 'park':campsite.park, 'id':campsite.id}
-
-#     return jsonify(results)
-
 
 @app.route("/dates", methods=["GET", "POST"])
 def date_selector():
@@ -87,7 +75,6 @@ def date_selector():
         session["date_end"] = date_end
         session["date_start_dt"] = datetime.datetime.strptime(date_start, '%m/%d/%Y')
         session["date_end_dt"] = datetime.datetime.strptime(date_end, '%m/%d/%Y')
-        print("***", session["date_end_dt"])
         return redirect("/submit")
 
 
@@ -118,6 +105,7 @@ def submission_form():
         )
     else:
         phone = request.form["phone"]
+        valid = is_valid_number(phone)
         if is_valid_number(phone) is True:
             new_user = User(phone=phone)
             db.session.add(new_user)
@@ -136,11 +124,13 @@ def submission_form():
                 db.session.commit()
                 # clear individual keys for session
             return redirect("/")
-        else:
-            print("Invalid number")
-            # block form from submitting in js
-            flash("Please enter a valid phone number")
-            return redirect("/")
+
+@app.route("/validate-phone-number.json", methods=["GET"])
+def validate_phone_number():
+
+    phone = request.args["phone"]
+
+    return jsonify({"is_valid":is_valid_number(phone)})
 
 
 @app.route("/about", methods=["GET"])

@@ -1,6 +1,5 @@
 from twilio.rest import Client
 from twilio.base.exceptions import TwilioRestException
-import constants
 
 # Your Account Sid and Auth Token from twilio.com/user/account
 # Store them in the environment variables:
