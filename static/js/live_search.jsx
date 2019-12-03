@@ -42,12 +42,13 @@ class CampsiteSearch extends React.Component {
         evt.preventDefault();
     }
 
+
     render() {
         return (
             <div>
-                <div className="col-sm-3 col-sm-offset-1 name-sidebar">
+                <div className="col name-sidebar">
                     <div className="sidebar-module sidebar-module-inset">
-                    <br /><br />
+                        <br /><br /> 
                         <form 
                             onSubmit={this.submitHandler} 
                             className="form-inline" 
@@ -65,23 +66,20 @@ class CampsiteSearch extends React.Component {
                                     onChange={this.handleSearchChange}
                                 />
                             </div>
-
                             {/* <button type="submit" className="btn btn-primary">Search</button><br /><br />*/}
                         </form><br /><br />
-                        
                     </div>
                 </div>
 
                 <div>
-    <form className="form-inline-2" method = "POST" action="/search">
-        <div className="list" id="campsite_list">
-            {this.renderCampsites()}
-            <button type="submit" className = "btn btn-selection">Next > </button>
-            <br /><br />
-           </div>
-    </form>
-
-</div>
+                    <form className="form-inline-2" method = "POST" action="/search">
+                        <div className="list" id="campsite_list">
+                            {this.renderCampsites()}
+                            <button type="submit" className = "btn btn-selection">Next > </button>
+                            <br /><br />
+                        </div>
+                    </form>
+                </div>
             </div>
         );
     }

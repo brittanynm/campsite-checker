@@ -18,10 +18,9 @@
 
 <form action="/submit" class="submit-request" id="submit-form" method="POST" >
     Phone number to alert: 
-    <input type="text" name="phone"><br><br>
-    <div id="test">
-        
-    </div>
+    <input type="text" name="phone">
+    <div id="invalid-message">
+    </div><br><br>
     <button type="submit">Submit Request </button>
 
 </form>
@@ -34,7 +33,7 @@
                 if (resp.is_valid) {
                     evt.target.submit();
                 } else {
-                    $("#test").html("Invalid phone number!");
+                    $("#invalid-message").html("Invalid phone number!");
                 }
                 
             })

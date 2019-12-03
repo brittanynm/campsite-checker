@@ -3,6 +3,12 @@
     flex-direction: column;
 }
 
+.name-sidebar {
+    background: url(/static/jtree.jpg);
+    background-position-y: 25%;
+    background-size: cover;
+}
+
 #demo {
     width: 296px;
     border: 0px;
@@ -12,6 +18,7 @@
 .lightpick {
     width: fit-content;
 }
+
 
 .date-selection {
     width: fit-content;
@@ -27,9 +34,16 @@
     padding-left: 3%;
 }
 
+.form-group {
+    width: 100%; 
+    display: flex; 
+    justify-content: center;
+}
+
 #home-title {
     font-size: large;
 }
+
 #About {
     padding-top: 5%;
     padding-left: 2%;
