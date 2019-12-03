@@ -7,42 +7,7 @@
 {% endblock %}
 
 {% block content %}
-
-
-<div id="homepage-block"><br>
-    <h1 id="homepage-title"></h1>
-</div>
-
-<div class="row">
-    <div id="root"></div>
-{#
-    <div class="col-sm-3 col-sm-offset-1 name-sidebar">
-        <div class="sidebar-module sidebar-module-inset"><br><br>
-            <form class="form-inline" method = "GET" action="/search">
-                <div class="form-group">
-                    <label for="query" id="home-title">Where do you want to go? </label>
-                    <input type="text" name="query" class="form-control" id="query">
-                </div>
-                <button type="submit" class="btn btn-primary">Search</button><br><br>
-            </form><br><br>
-        </div>
-    </div>
-</div>
-
-<div>
-    <form class="form-inline-2" method = "POST" action="/search">
-        <div class="list" id="campsite_list">
-            {% for campsite in campsites %}
-            <div class="campsite-name">
-                <input type="radio" name="selected_site" value="{{ campsite.id }}" required>
-                <b>{{ campsite.name }}</b>
-                {{ campsite.park }}<hr>
-            {% endfor %}
-            <button type="submit" class = "btn btn-selection">Next > </button><br><br>
-           </div>
-    </form> #}
-
-</div>
+<div id="root"></div>
 
 <script type="text/jsx" src='/static/js/live_search.jsx'></script>
 

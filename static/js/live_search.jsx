@@ -45,41 +45,47 @@ class CampsiteSearch extends React.Component {
 
     render() {
         return (
-            <div>
-                <div className="col name-sidebar">
-                    <div className="sidebar-module sidebar-module-inset">
-                        <br /><br /> 
-                        <form 
-                            onSubmit={this.submitHandler} 
-                            className="form-inline" 
-                            method = "GET" 
-                            action="/search"
-                            >
-                            <div className="form-group">
-                                <label htmlFor="query">Where do you want to go? </label>
-                                <input
-                                    type="text"
-                                    name="query"
-                                    className="form-control"
-                                    id="query"
-                                    value={this.state.query}
-                                    onChange={this.handleSearchChange}
-                                />
+            <div className="container">
+                    <div className="row"> 
+                        <div className="col">
+                            <div className="name-sidebar">
+                                <div className="sidebar-module sidebar-module-inset">
+                                    <br /><br /> 
+                                    <form 
+                                        onSubmit={this.submitHandler} 
+                                        className="form-inline" 
+                                        method = "GET" 
+                                        action="/search"
+                                        >
+                                        <div className="form-group">
+                                            <label htmlFor="query">Where do you want to go? </label>
+                                            <input
+                                                type="text"
+                                                name="query"
+                                                className="form-control"
+                                                id="query"
+                                                value={this.state.query}
+                                                onChange={this.handleSearchChange}
+                                            />
+                                        </div>
+                                        {/* <button type="submit" className="btn btn-primary">Search</button><br /><br />*/}
+                                    </form><br /><br />
+                                </div>
                             </div>
-                            {/* <button type="submit" className="btn btn-primary">Search</button><br /><br />*/}
-                        </form><br /><br />
-                    </div>
-                </div>
-
-                <div>
-                    <form className="form-inline-2" method = "POST" action="/search">
-                        <div className="list" id="campsite_list">
-                            {this.renderCampsites()}
-                            <button type="submit" className = "btn btn-selection">Next > </button>
-                            <br /><br />
                         </div>
-                    </form>
-                </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="col">
+                            <form className="form-inline-2" method = "POST" action="/search">
+                                <div className="list" id="campsite_list">
+                                    {this.renderCampsites()}
+                                    <button type="submit" className = "btn btn-selection">Next > 
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
             </div>
         );
     }
