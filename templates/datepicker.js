@@ -3,5 +3,7 @@ const myPicker = new Lightpick({
       singleDate: false,
       startDate: null,
       endDate: null,
-      inline: true
+      inline: true,
+      numberOfColumns: 2,
+      numberOfMonths: 2
 });

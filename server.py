@@ -123,7 +123,7 @@ def submission_form():
                 #convert campsite list to set before comitting to db
                 db.session.commit()
                 # clear individual keys for session
-            return redirect("/")
+            return render_template("confirm.html")
 
 @app.route("/validate-phone-number.json", methods=["GET"])
 def validate_phone_number():

@@ -55,9 +55,17 @@ ul.tent {
     padding-bottom: 4%;
 }
 
+#six-months{
+    width: 450px;
+    background-color: rgb(235, 235, 235);
+}
+
 .flex-col {
     display: flex;
     flex-direction: column;
+    width: 350px;
+    text-align: center;
+    align-items: center;
 }
 
 .name-sidebar {
@@ -104,6 +112,7 @@ ul.tent {
 
 .lightpick {
     width: fit-content;
+    text-align: 
 }
 
 .datepicker {
@@ -117,7 +126,7 @@ ul.tent {
 }
 
 #title {
-    width: 296px;
+    width: 400px;
     text-align: center;
 }
 
