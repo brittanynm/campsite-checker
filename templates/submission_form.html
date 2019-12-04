@@ -4,18 +4,29 @@
     <div class="inner-form-final">
         <br><br>
         <div>
-            <h3>REQUEST DETAILS</h2><br>
+            <div id="wrapper">
+                <div id="summary-title"><h3>REQUEST DETAILS</h3></div>
+            </div><br><br>
 
-            <b>{{ date_start }} - {{ date_end }}<br><br></b>
+            <h5>Dates</h5>
 
-            {% for campsite in list_of_objs %}
+            <div id="selected-dates">
+                <b>{{ date_start }} - {{ date_end }}</b><br><br>
+            </div>
+            <div id="selected-sites">
+                {% for campsite in list_of_objs %}
+                <ul class="tent">
+                    <li><b> 
+                        {{ campsite.name }} in {{ campsite.park }}</b>
+                        <br>{{ available[loop.index0] }}
+                    </li>
+                    
+                </ul>
+                {% endfor %}
 
-                <b>⛺️ {{ campsite.name }} in {{ campsite.park }}</b><br>
-                {{ available[loop.index0] }}<br><br>
-
-            {% endfor %}
-
-            <a href='https://www.recreation.gov/'> recreation.gov</a><br>
+                <div class="rec-gov-link">If sites are available, book now at <a href='https://www.recreation.gov/'> recreation.gov</a>
+                </div>
+            </div>
         </div><br>
 
         <form action="/submit" class="submit-request" id="submit-form" method="POST" >

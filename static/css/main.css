@@ -1,3 +1,32 @@
+ul.tent {
+    list-style-image: url('/static/tent.jpg');
+}
+
+#wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    width: 100%;
+  
+}
+
+.rec-gov-link {
+    color: grey;
+}
+#summary-title {
+    background-color: #FFE8BF;
+    color: #807460;
+    display: flex; 
+    align-items: center;
+    justify-content: left;  
+    height: 60px; 
+    width: 100%;
+}
+
+#selected-dates {
+    border-color: #d3d3d3;
+}
+
 .flex-col {
     display: flex;
     flex-direction: column;
@@ -12,6 +41,12 @@
     left: 0;
     content: "";
     display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-group {
+    display: flex; 
     align-items: center;
     justify-content: center;
 }
@@ -43,7 +78,6 @@
     justify-content: center;
 }
 
-
 .date-selection {
     width: fit-content;
 }
@@ -59,12 +93,6 @@
 
 #calendar-form {
     padding-left: 3%;
-}
-
-.form-group {
-    display: flex; 
-    align-items: center;
-    justify-content: center;
 }
 
 #home-title {
