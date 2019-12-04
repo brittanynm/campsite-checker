@@ -5,20 +5,21 @@
     <link rel="stylesheet" type="text/css" href="/static/css/lightpick.css">
 </head>
 <body>
-
-
-    <br><br>
-    <form action="/dates" class="flex-col" id="calendar-form" method="POST">
-        <div id="title"><h5>When would you like to go?</h5></div><br>
-        <div class="flex-col"> 
-            <input type="text" value= "Select dates" id="demo" name="date-start"><br>
-        </div>
-        <!-- <label for="end" required>Depart:</label>
-            <input type="text" id="start" name="date-end" required><br><br> -->
+  <div class="align">
+    <div class="datepicker">
         <br><br>
-        <button type="submit" class="date-selection">Next > </button>
-    </form>
-
+        <form action="/dates" class="flex-col" id="calendar-form" method="POST">
+            <div id="title"><h4>When would you like to go?</h4></div><br>
+            <div class="flex-col"> 
+                <input type="text" value= "Select dates" id="demo" name="date-start"><br>
+            </div>
+            <!-- <label for="end" required>Depart:</label>
+                <input type="text" id="start" name="date-end" required><br><br> -->
+            <br><br>
+            <button type="submit" class="text-right">Next > </button>
+        </form>
+    </div>
+  </div>
 </body> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
 <script src="https://unpkg.com/lightpick@latest/lightpick.js"></script>

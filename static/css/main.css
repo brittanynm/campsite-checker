@@ -15,6 +15,14 @@
     align-items: center;
     justify-content: center;
 }
+.align {
+    display: flex;
+    align-items: center;
+    justify-content: center;   
+}
+.text-right {
+    border-color: white;
+}
 
 #demo {
     width: 296px;
@@ -26,6 +34,11 @@
     width: fit-content;
 }
 
+.datepicker {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}
 
 .date-selection {
     width: fit-content;
