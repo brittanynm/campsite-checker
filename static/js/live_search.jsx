@@ -49,28 +49,25 @@ class CampsiteSearch extends React.Component {
                     <div className="row"> 
                         <div className="col">
                             <div className="name-sidebar">
-                                <div className="sidebar-module sidebar-module-inset">
-                                    <br /><br /> 
-                                    <form 
-                                        onSubmit={this.submitHandler} 
-                                        className="form-inline" 
-                                        method = "GET" 
-                                        action="/search"
-                                        >
-                                        <div className="form-group">
-                                            <label htmlFor="query">Where do you want to go? </label>
-                                            <input
-                                                type="text"
-                                                name="query"
-                                                className="form-control"
-                                                id="query"
-                                                value={this.state.query}
-                                                onChange={this.handleSearchChange}
-                                            />
-                                        </div>
-                                        {/* <button type="submit" className="btn btn-primary">Search</button><br /><br />*/}
-                                    </form><br /><br />
-                                </div>
+                                <form 
+                                    onSubmit={this.submitHandler} 
+                                    className="form-inline" 
+                                    method = "GET" 
+                                    action="/search">
+                                    <div className="form-group">
+                                        <label id="search-title" htmlFor="query"><h3>Where do you want to go?</h3>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="query"
+                                            className="form-control"
+                                            id="query"
+                                            value={this.state.query}
+                                            onChange={this.handleSearchChange}
+                                        />
+                                    </div>
+                                    {/* <button type="submit" className="btn btn-primary">Search</button><br /><br />*/}
+                                </form><br /><br />
                             </div>
                         </div>
                     </div>

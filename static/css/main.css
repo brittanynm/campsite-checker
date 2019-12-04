@@ -8,10 +8,12 @@
     background-position-y: 25%;
     background-size: cover;
     width: 100%;
-    height: 400px;
+    height: 275px;
     left: 0;
     content: "";
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #demo {
@@ -27,8 +29,7 @@
 
 .date-selection {
     width: fit-content;
-    align
-*/}
+}
 
 #title {
     width: 296px;
@@ -40,8 +41,8 @@
 }
 
 .form-group {
-    width: 100%; 
     display: flex; 
+    align-items: center;
     justify-content: center;
 }
 
@@ -85,5 +86,9 @@ body {
 
 .navbar-brand {
     color: #FFDCB8
+}
+
+#search-title {
+    color: white;
 }
 

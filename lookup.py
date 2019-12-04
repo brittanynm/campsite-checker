@@ -1,9 +1,6 @@
 from twilio.rest import Client
 from twilio.base.exceptions import TwilioRestException
 
-# Your Account Sid and Auth Token from twilio.com/user/account
-# Store them in the environment variables:
-# "TWILIO_ACCOUNT_SID" and "TWILIO_AUTH_TOKEN"
 client = Client()
 
 def is_valid_number(number):
