@@ -1,29 +1,34 @@
 {% extends 'base.html' %}
 {% block content %}
-<br><br>
-<div>
-    <h3>REQUEST DETAILS</h2><br>
+<div class="form-group-final">
+    <div class="inner-form-final">
+        <br><br>
+        <div>
+            <h3>REQUEST DETAILS</h2><br>
 
-    <b>{{ date_start }} - {{ date_end }}<br><br></b>
+            <b>{{ date_start }} - {{ date_end }}<br><br></b>
 
-    {% for campsite in list_of_objs %}
+            {% for campsite in list_of_objs %}
 
-        <b>{{ campsite.name }} in {{ campsite.park }}</b><br>
-        {{ available[loop.index0] }}<br><br>
+                <b>⛺️ {{ campsite.name }} in {{ campsite.park }}</b><br>
+                {{ available[loop.index0] }}<br><br>
 
-    {% endfor %}
+            {% endfor %}
 
-    <a href='https://www.recreation.gov/'> recreation.gov</a><br>
-</div><br>
+            <a href='https://www.recreation.gov/'> recreation.gov</a><br>
+        </div><br>
 
-<form action="/submit" class="submit-request" id="submit-form" method="POST" >
-    Phone number to alert: 
-    <input type="text" name="phone">
-    <div id="invalid-message">
-    </div><br><br>
-    <button type="submit">Submit Request </button>
+        <form action="/submit" class="submit-request" id="submit-form" method="POST" >
+            Phone number to alert: 
+            <input type="text" name="phone">
+            <div id="invalid-message">
+            </div><br><br>
+            <button type="submit" id="submit-request-button">Submit Request </button>
 
-</form>
+        </form>
+    </div>
+</div>
+
 <script>
     $("#submit-form").on("submit", 
         (evt) => { 
@@ -39,7 +44,5 @@
             })
         }
     );
-
-
 </script>
 {% endblock %}

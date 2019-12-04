@@ -139,7 +139,7 @@ def about_page():
 
 if __name__ == "__main__":
     # Change to False for demo
-    app.debug = True
+    app.debug = False
     connect_to_db(app)
     DebugToolbarExtension(app)
     app.run(host="0.0.0.0")
