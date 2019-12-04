@@ -6,37 +6,40 @@
         <div>
             <div id="wrapper">
                 <div id="summary-title"><h3>REQUEST DETAILS</h3></div>
-            </div><br><br>
-
-            <h5>Dates</h5>
-
-            <div id="selected-dates">
-                <b>{{ date_start }} - {{ date_end }}</b><br><br>
             </div>
-            <div id="selected-sites">
-                {% for campsite in list_of_objs %}
-                <ul class="tent">
-                    <li><b> 
-                        {{ campsite.name }} in {{ campsite.park }}</b>
-                        <br>{{ available[loop.index0] }}
-                    </li>
-                    
-                </ul>
-                {% endfor %}
+            <div class="content">
+                <div class="dates-section">
+                    <b>Dates</b>
 
+                    <div id="selected-dates-border">
+                        <div id="selected-dates">
+                            {{ date_start }} - {{ date_end }}
+                        </div>
+                    </div>      
+                </div>
+                <div id="selected-sites">
+                    {% for campsite in list_of_objs %}
+                    <ul class="tent">
+                        <li><b> 
+                            {{ campsite.name }} in {{ campsite.park }}</b>
+                            <br>{{ available[loop.index0] }}
+                        </li>
+                        
+                    </ul>
+                    {% endfor %}
+                </div>
                 <div class="rec-gov-link">If sites are available, book now at <a href='https://www.recreation.gov/'> recreation.gov</a>
                 </div>
-            </div>
-        </div><br>
-
-        <form action="/submit" class="submit-request" id="submit-form" method="POST" >
-            Phone number to alert: 
-            <input type="text" name="phone">
-            <div id="invalid-message">
-            </div><br><br>
-            <button type="submit" id="submit-request-button">Submit Request </button>
-
-        </form>
+                
+                <form action="/submit" class="submit-request" id="submit-form" method="POST" >
+                Phone number to alert: 
+                    <input type="text" name="phone">
+                        <div id="invalid-message">
+                        </div><br><br>
+                <button type="submit" id="submit-request-button">Submit Request </button>
+            </form>
+            </div><br>
+        </div>
     </div>
 </div>
 

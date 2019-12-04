@@ -27,8 +27,9 @@ class CampsiteSearch extends React.Component {
 
         for (const [key, campsite] of Object.entries(this.state.campsites)) {
             campsiteDivs.push(
-                <div className="campsite-name" key={key}>
-                    <input type="checkbox" name="selected_site" value={campsite.id}/>
+                <div className="custom-control custom-checkbox" key={key}>
+                    <input type="checkbox" className="form-check-input" name="selected_site" value={campsite.id}/>
+
                     <b> {campsite.name} </b>
                     {campsite.park}<hr />
                 </div>
@@ -77,8 +78,10 @@ class CampsiteSearch extends React.Component {
                             <form className="form-inline-2" method = "POST" action="/search">
                                 <div className="list" id="campsite_list">
                                     {this.renderCampsites()}
-                                    <button type="submit" className = "btn btn-selection">Next > 
-                                    </button>
+                                    <div className="text-right">
+                                        <button type="submit" className = "btn-selection">Next > 
+                                        </button>
+                                    </div>
                                 </div>
                             </form>
                         </div>
