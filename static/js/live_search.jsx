@@ -28,7 +28,11 @@ class CampsiteSearch extends React.Component {
         for (const [key, campsite] of Object.entries(this.state.campsites)) {
             campsiteDivs.push(
                 <div className="custom-control custom-checkbox" key={key}>
-                    <input type="checkbox" className="form-check-input" name="selected_site" value={campsite.id}/>
+                    <input  type="checkbox" 
+                            className="form-check-input" 
+                            name="selected_site" 
+                             
+                            value={campsite.id}/>
 
                     <b> {campsite.name} </b>
                     {campsite.park}<hr />

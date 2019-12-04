@@ -5,11 +5,11 @@
         <br><br>
         <div>
             <div id="wrapper">
-                <div id="summary-title"><h3>REQUEST DETAILS</h3></div>
+                <div id="summary-title"><h3>REQUEST DETAILS </h3></div>
             </div>
             <div class="content">
                 <div class="dates-section">
-                    <b>Dates</b>
+                    <b>Dates Selected</b>
 
                     <div id="selected-dates-border">
                         <div id="selected-dates">
@@ -28,16 +28,20 @@
                     </ul>
                     {% endfor %}
                 </div>
-                <div class="rec-gov-link">Ready to book? Go to <a href='https://www.recreation.gov/'> recreation.gov</a>
+                <div class="rec-gov-link">Ready to book now? Go to <a href='https://www.recreation.gov/'> recreation.gov</a>
                 </div>
                 
                 <form action="/submit" class="submit-request" id="submit-form" method="POST" >
-                Phone number to alert: 
-                    <input type="text" name="phone">
-                        <div id="invalid-message">
-                        </div><br><br>
-                <button type="submit" id="submit-request-button">Submit Request </button>
-            </form>
+                    <div class="input-phone">
+                        <b>Phone number to alert:</b> 
+                        <div id="phone-border">
+                            <input type="text" name="phone">
+                                <div id="invalid-message">
+                                </div><br><br>
+                        </div>
+                        <button type="submit" id="submit-request-button">Submit Request </button>
+                    </div>
+                </form>
             </div><br>
         </div>
     </div>
