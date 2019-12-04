@@ -12,9 +12,14 @@ ul.tent {
 .content {
     padding-left: 3%;
 }
+#phone {
+    border-color: 1px solid black;
+    width: 250px;
+}
 
 #phone-border {
-    border-color: black;
+    border-color: 1px solid black;
+    width: 250px;
 }
 #summary-title {
     background-color: #e2514c4a;
