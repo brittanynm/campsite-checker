@@ -63,7 +63,7 @@ ul.tent {
 .flex-col {
     display: flex;
     flex-direction: column;
-    width: 350px;
+    width: 450px;
     text-align: center;
     align-items: center;
 }
@@ -126,7 +126,7 @@ ul.tent {
 }
 
 #title {
-    width: 400px;
+    width: 450px;
     text-align: center;
 }
 
