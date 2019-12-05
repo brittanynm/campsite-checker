@@ -122,6 +122,7 @@ def submission_form():
                     date_start=session["date_start_dt"],
                     date_end=session["date_end_dt"],
                 )
+                print("**", new_request)
                 db.session.add(new_request)
                 #convert campsite list to set before comitting to db
                 db.session.commit()

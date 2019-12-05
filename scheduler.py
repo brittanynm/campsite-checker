@@ -33,15 +33,20 @@ def job():
         )
         resp = check_availability(date_start, date_end, campsite_id)
         for site in resp["campsites"].values():
-            available = bool(len(site["availabilities"]))
-            if available:
-                subscription.available = True
-                db.session.add(subscription)
-                db.session.commit()
-        user_id = User.query.filter(User.user_id == subscription.user_id).one()
-        phone = user_id.phone
-        send_text(phone)
-        subscription.sms_sent = True
+            # available = bool(len(site["availabilities"]))
+            for status in site["availabilities"].values():
+                if status == "Available":
+                    subscription.available = True
+                    db.session.add(subscription)
+                    db.session.commit()
+                    break
+        if subscription.available == True:
+            user_id = User.query.filter(User.user_id == subscription.user_id).one()
+            phone = user_id.phone
+            send_text(phone)
+            subscription.sms_sent = True
+            db.session.add(subscription)
+            db.session.commit()
 
 
 def send_text(phone):
