@@ -12,6 +12,7 @@ ul.tent {
 .content {
     padding-left: 3%;
 }
+
 #phone {
     border-color: 1px solid black;
     width: 250px;
@@ -31,20 +32,11 @@ ul.tent {
     width: 100%;
 }
 
-#selected-dates-border {
-    border: 1px solid lightgrey;
-    width: 250px;
-    text-align: center;
-}
 
-#selected-dates {
+.selected-dates {
     padding: 3%;
 }
 
-.dates-section {
-    padding-bottom: 4%;
-    padding-top: 4%;
-}
 
 #selected-sites {
     padding-bottom: 4%;

@@ -8,14 +8,8 @@
                 <div id="summary-title"><h3>REQUEST DETAILS </h3></div>
             </div>
             <div class="content">
-                <div class="dates-section">
-                    <b>Dates Selected</b>
-
-                    <div id="selected-dates-border">
-                        <div id="selected-dates">
-                            {{ date_start }} - {{ date_end }}
-                        </div>
-                    </div>      
+                <div class="selected-dates">
+                    <h4>{{ date_start }} - {{ date_end }}</h4>
                 </div>
                 <div id="selected-sites">
                     {% for campsite in list_of_objs %}
