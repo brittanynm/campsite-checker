@@ -17,13 +17,16 @@
                         <li><b> 
                             {{ campsite.name }} in {{ campsite.park }}</b>
                             <br>{{ available[loop.index0] }}
+                            {% if avail_num[loop.index0] != '0' %}
+                                <div class="rec-gov-link">Ready to book now? Go to <a href='https://www.recreation.gov/'> recreation.gov</a>
+                                </div>
+                             {% endif %}
                         </li>
                         
                     </ul>
                     {% endfor %}
                 </div>
-                <div class="rec-gov-link">Ready to book now? Go to <a href='https://www.recreation.gov/'> recreation.gov</a>
-                </div>
+                
                 
                 <form action="/submit" class="submit-request" id="submit-form" method="POST" >
                     <div class="input-phone">
