@@ -31,7 +31,10 @@ ul.tent {
     height: 60px; 
     width: 100%;
 }
-
+.about-section {
+    padding-left: 15%;
+    padding-right: 15%;
+}
 
 .selected-dates {
     padding: 3%;
