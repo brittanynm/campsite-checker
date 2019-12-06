@@ -1,5 +1,6 @@
 ul.tent {
     list-style-image: url('/static/tent.jpg');
+    list-style-position: inside;
 }
 
 #wrapper {
@@ -11,6 +12,8 @@ ul.tent {
 
 .content {
     padding-left: 3%;
+    text-align: center;
+    list-style-position: inside;
 }
 
 #phone {
@@ -21,6 +24,7 @@ ul.tent {
 #phone-border {
     border-color: 1px solid black;
     width: 250px;
+    margin: auto;
 }
 #summary-title {
     background-color: #e2514c4a;
