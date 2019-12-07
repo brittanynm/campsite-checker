@@ -10,7 +10,6 @@ from model import connect_to_db, db, User, Campsite, Request
 import datetime
 from lookup import is_valid_number
 from api import check_availability, get_num_available_sites
-from helpers import *
 
 app = Flask(__name__)
 
