@@ -1,6 +1,4 @@
 ## 🍁 Wanderment 
-![User Flow](/campsite-checker/static/wanderment.gif)
-
 
 Wanderment makes getting outside easier. Users can select multiple campsites they'd like to visit for a chosen date range. The program will then check for availability every 5 minutes and send a text message via Twilio if the criteria return availability.
 
