@@ -1,5 +1,5 @@
 ## 🍁 Wanderment 
-![](wanderment.gif)
+![](/static/wanderment.gif)
 Wanderment is a soldout campsite reservation notifier that makes getting outside easier. Users can select multiple campsites they'd like to visit for a chosen date range. The program will then check for availability every 5 minutes and send a text message via Twilio if the criteria return availability.
 
 ## Tech Stack
