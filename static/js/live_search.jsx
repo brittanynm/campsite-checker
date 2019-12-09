@@ -31,9 +31,7 @@ class CampsiteSearch extends React.Component {
                     <input  type="checkbox" 
                             className="form-check-input" 
                             name="selected_site" 
-                             
                             value={campsite.id}/>
-
                     <b> {campsite.name} </b>
                     {campsite.park}<hr />
                 </div>
@@ -46,7 +44,6 @@ class CampsiteSearch extends React.Component {
     submitHandler(evt) {
         evt.preventDefault();
     }
-
 
     render() {
         return (
