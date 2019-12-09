@@ -43,18 +43,19 @@ def job():
         if subscription.available == True:
             user_id = User.query.filter(User.user_id == subscription.user_id).one()
             phone = user_id.phone
-            send_text(phone)
+            site= subscription.campsite_id
+            send_text(phone, site)
             subscription.sms_sent = True
-            db.session.add(subscription)
+            # db.session.add(subscription)
             db.session.commit()
 
 
-def send_text(phone):
+def send_text(phone, site):
     """Sends user a text letting them know their is availability"""
     print("Send text")
     message = client.messages.create(
-        body="There is availability at your campsite! Go to www.recreation.gov to book as soon as possible!",
-        from_="+14125321330",
+        body="There is availability for one of your campsites! Go to https://www.recreation.gov/camping/campgrounds/" + site + "/availability to book it as soon as possible!",
+        from_="+14125321330",                  
         to="+1" + phone,
     )
 
