@@ -2,7 +2,9 @@ ul.tent {
     list-style-image: url('/static/tent.jpg');
     list-style-position: inside;
 }
-
+.FCFS {
+    color: grey;
+}
 .git {
     max-width: 25px;
     padding: 7%;

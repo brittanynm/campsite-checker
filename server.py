@@ -84,6 +84,7 @@ def submission_form():
         list_of_objs = []
         available_list = []
         avail_num = []
+        totals = []
         for campsite in session["campsites"]:
             site_obj = Campsite.query.filter_by(id=campsite).one()
             list_of_objs.append(site_obj)
@@ -95,7 +96,10 @@ def submission_form():
             )
             available_list.append(available)
             avail_num.append(available[0])
-        
+        for item in available_list:
+            chars = item.split()
+            totals.append(chars[5])
+
         return render_template(
             "submission_form.html",
             campsites=session["campsites"],
@@ -103,7 +107,8 @@ def submission_form():
             date_start=session["date_start"],
             date_end=session["date_end"],
             available=available_list,
-            avail_num=avail_num
+            avail_num=avail_num,
+            totals=totals
         )
     else:
         phone = request.form["phone"]
@@ -121,7 +126,6 @@ def submission_form():
                     date_start=session["date_start_dt"],
                     date_end=session["date_end_dt"],
                 )
-                print("**", new_request)
                 db.session.add(new_request)
                 #convert campsite list to set before comitting to db
                 db.session.commit()

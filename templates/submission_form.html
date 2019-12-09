@@ -14,13 +14,17 @@
                 <div id="selected-sites">
                     {% for campsite in list_of_objs %}
                     <ul class="tent">
-                        <li><b> 
-                            {{ campsite.name }} in {{ campsite.park }}</b>
-                            <br>{{ available[loop.index0] }}
-                            {% if avail_num[loop.index0] != '0' %}
+                        <li> 
+                            <b>{{ campsite.name }} in {{ campsite.park }}</b><br>
+                            {{ available[loop.index0] }}
+                            {% if totals[loop.index0] == '0' 
+                                and avail_num[loop.index0] == '0' %}
+                                <div class="FCFS">This campground is first come first serve. </div>
+
+                            {% elif avail_num[loop.index0] != '0' %}
                                 <div class="rec-gov-link">Sites are available now! Go to <a href='https://www.recreation.gov/'> recreation.gov</a>
                                 to book.</div>
-                             {% endif %}
+                            {% endif %}
                         </li>
                         
                     </ul>
