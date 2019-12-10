@@ -8,7 +8,7 @@ Group=ubuntu
 Environment="LANG=en_US.UTF-8"
 Environment="LANGUAGE=en_US.UTF-8:"
 WorkingDirectory=/home/ubuntu/campsite-checker/
-ExecStart=/bin/bash -c "source .twilio.env\
+ExecStart=/bin/bash -c "source twilio.env\
 && source env/bin/activate\
 && python3 scheduler.py &>> scheduler.log"
 Restart=always
