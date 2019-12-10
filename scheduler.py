@@ -65,4 +65,4 @@ schedule.every(5).minutes.do(job)
 while True:
     # print("Check")
     schedule.run_pending()
-    time.sleep(1)
+    # time.sleep(1)
