@@ -60,9 +60,9 @@ def send_text(phone, site):
     )
 
 
-schedule.every(10).seconds.do(job)
+schedule.every(5).minutes.do(job)
 
 while True:
-    print("Check")
+    # print("Check")
     schedule.run_pending()
     time.sleep(1)
