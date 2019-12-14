@@ -29,13 +29,11 @@ class FlaskTests(TestCase):
         # db.drop_all()
 
     def test_find_user(self):
-        """Can we find an employee in the sample data?"""
 
         brittany = User.query.filter(User.phone == "2197188608").first()
         self.assertEqual(brittany.phone, "2197188608")
 
     def test_find_campsite(self):
-        """Find employees in a state."""
 
         jtree = Campsite.query.filter(Campsite.name == "Tuolumne Meadows").first()
         self.assertEqual(jtree.name, "Tuolumne Meadows")
