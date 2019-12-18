@@ -46,13 +46,21 @@ def search():
 def live_search():
     campsite_name = request.args.get("query")
     q = Campsite.query
-    campsites = q.filter(
-        (Campsite.name.ilike(f"%{campsite_name}%"))
-        | (Campsite.park.ilike(f"%{campsite_name}%"))
-        ).limit(100).all()
+    campsites = (
+        q.filter(
+            (Campsite.name.ilike(f"%{campsite_name}%"))
+            | (Campsite.park.ilike(f"%{campsite_name}%"))
+        )
+        .limit(100)
+        .all()
+    )
     results = {}
     for campsite in campsites:
-        results[campsite.id] = {'name': campsite.name, 'park':campsite.park, 'id':campsite.id}
+        results[campsite.id] = {
+            "name": campsite.name,
+            "park": campsite.park,
+            "id": campsite.id,
+        }
 
     return jsonify(results)
 
@@ -62,9 +70,7 @@ def date_selector():
     """Collect check in and check out dates"""
     if request.method == "GET":
         campsite_name = request.args.get("query")
-        return render_template(
-            "calendar.html"
-        )
+        return render_template("calendar.html")
     else:
         date_start = request.form["date-start"]
         dates = date_start.split(" - ")
@@ -72,8 +78,8 @@ def date_selector():
         date_end = dates[1]
         session["date_start"] = date_start
         session["date_end"] = date_end
-        session["date_start_dt"] = datetime.datetime.strptime(date_start, '%m/%d/%Y')
-        session["date_end_dt"] = datetime.datetime.strptime(date_end, '%m/%d/%Y')
+        session["date_start_dt"] = datetime.datetime.strptime(date_start, "%m/%d/%Y")
+        session["date_end_dt"] = datetime.datetime.strptime(date_end, "%m/%d/%Y")
         return redirect("/submit")
 
 
@@ -108,7 +114,7 @@ def submission_form():
             date_end=session["date_end"],
             available=available_list,
             avail_num=avail_num,
-            totals=totals
+            totals=totals,
         )
     else:
         phone = request.form["phone"]
@@ -127,22 +133,24 @@ def submission_form():
                     date_end=session["date_end_dt"],
                 )
                 db.session.add(new_request)
-                #convert campsite list to set before comitting to db
+                # convert campsite list to set before comitting to db
                 db.session.commit()
                 # clear individual keys for session
             return render_template("confirm.html")
+
 
 @app.route("/validate-phone-number.json", methods=["GET"])
 def validate_phone_number():
 
     phone = request.args["phone"]
 
-    return jsonify({"is_valid":is_valid_number(phone)})
+    return jsonify({"is_valid": is_valid_number(phone)})
 
 
 @app.route("/about", methods=["GET"])
 def about_page():
     return render_template("about.html")
+
 
 if __name__ == "__main__":
     # Change to False for demo
