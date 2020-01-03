@@ -26,7 +26,7 @@ def index():
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
-    """Filter search and process selection"""
+    """Process campsite selection selection"""
     if request.method == "GET":
         campsite_name = request.args.get("query")
         q = Campsite.query
@@ -44,6 +44,7 @@ def search():
 
 @app.route("/live_search", methods=["GET"])
 def live_search():
+    '''Filter search results'''
     campsite_name = request.args.get("query")
     q = Campsite.query
     campsites = (
@@ -133,9 +134,7 @@ def submission_form():
                     date_end=session["date_end_dt"],
                 )
                 db.session.add(new_request)
-                # convert campsite list to set before comitting to db
                 db.session.commit()
-                # clear individual keys for session
             return render_template("confirm.html")
 
 
@@ -153,7 +152,6 @@ def about_page():
 
 
 if __name__ == "__main__":
-    # Change to False for demo
     app.debug = False
     connect_to_db(app)
     DebugToolbarExtension(app)

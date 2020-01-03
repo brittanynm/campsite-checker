@@ -24,7 +24,6 @@ def job():
         .order_by(Request.created_at.desc())
         .all()
     )
-    print(subscriptions)
     for subscription in subscriptions:
         date_start, date_end, campsite_id = (
             subscription.date_start,
@@ -52,7 +51,6 @@ def job():
 
 def send_text(phone, site):
     """Sends user a text letting them know their is availability"""
-    print("Send text")
     message = client.messages.create(
         body="There is availability for one of your campsites! Go to https://www.recreation.gov/camping/campgrounds/" + site + "/availability to book it as soon as possible!",
         from_="+14125321330",                  
@@ -63,6 +61,4 @@ def send_text(phone, site):
 schedule.every(5).minutes.do(job)
 
 while True:
-    # print("Check")
     schedule.run_pending()
-    # time.sleep(1)

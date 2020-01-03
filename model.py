@@ -17,9 +17,6 @@ class User(db.Model):
 
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     phone = db.Column(db.String(10))
-    email = db.Column(db.String(65))
-    password_hash = db.Column(db.LargeBinary, nullable=True)
-
     request = db.relationship("Request")
 
     def __repr__(self):
@@ -34,8 +31,6 @@ class Campsite(db.Model):
     id = db.Column(db.String, primary_key=True)
     name = db.Column(db.String(250), nullable=False)
     park = db.Column(db.String(250))
-    RV = db.Column(db.Boolean, default=False)
-    electricty = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
 
@@ -53,7 +48,6 @@ class Request(db.Model):
     campsite_id = db.Column(db.String, db.ForeignKey("campsites.id"))
     date_start = db.Column(db.DateTime)
     date_end = db.Column(db.DateTime)
-    num_nights = db.Column(db.Integer)
     available = db.Column(db.Boolean, default=False)
     sms_sent = db.Column(db.Boolean, default=False)
     user = db.relationship("User")
@@ -75,8 +69,6 @@ def connect_to_db(app):
 
 
 if __name__ == "__main__":
-    # If I run this module interactively, I can work with the database
-    # directly
 
     from server import app
 
