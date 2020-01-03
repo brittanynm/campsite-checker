@@ -17,10 +17,8 @@ def check_availability(date_start, date_end, site_id):
     query = (
         "?start_date="
         + date_start.strftime("%Y-%m-%d")
-        # + date_start
         + "T00%3A00%3A00.000Z&end_date="
         + date_end.strftime("%Y-%m-%d")
-        # + date_end
         + "T00%3A00%3A00.000Z"
     )
 

@@ -12,6 +12,3 @@ def is_valid_number(number):
             return False
         else:
             raise e
-
-# print(is_valid_number('19999999999')) # False
-# print(is_valid_number('15108675309')) # True
